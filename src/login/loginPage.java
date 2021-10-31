@@ -1,5 +1,7 @@
-import code.mainMenu.main_menu;
-import code.User.user;
+package login;
+import mainMenu.mainMenu;
+import user.user;
+import java.util.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -34,47 +36,9 @@ public class loginPage
 					break;
 		}
 	}
-}
-
-
-
-public int checkAndGetUserType(User user) {
-		
-		String userId = user.getUserId();
-		String password = user.getPassword();
-//		String address = user.getRole();
-		
-		String insert_user_query = getInsertQuery(userId, password);
-		String type = "A";
-		Statement stmt;
-		try {
-			stmt = conn.createStatement();
-			rs=stmt.executeQuery(insert_user_query);  
-			type = rs.getString("USER_TYPE");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
-		
-		int id = 1;
-		switch(type) {
-			case "C": 
-				id = 3;
-				break;
-			case "B": 
-				id = 2;
-				break;
-			case "A": 
-				id = 1;
-				break;
-			
-		}
-		return id;
-		
-	}
-
-
-
+	
+	
+	
 	public int validate(User user) throws SQLException
 	{
 		String select_user_query=generateSelectQuery();
@@ -87,6 +51,44 @@ public int checkAndGetUserType(User user) {
 		return 0;
 	}
 	
+	
+	
+	
+	public int checkAndGetUserType(User user) {
+			
+			String userId = user.getUserId();
+			String password = user.getPassword();
+	//		String address = user.getRole();
+			
+			String insert_user_query = getInsertQuery(userId, password);
+			String type = "A";
+			Statement stmt;
+			try {
+				stmt = conn.createStatement();
+				rs=stmt.executeQuery(insert_user_query);  
+				type = rs.getString("USER_TYPE");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+			
+			int id = 1;
+			switch(type) {
+				case "C": 
+					id = 3;
+					break;
+				case "B": 
+					id = 2;
+					break;
+				case "A": 
+					id = 1;
+					break;
+				
+			}
+			return id;
+			
+		}
+		
 	public String generateSelectQuery()
 	{
 		return "select * from customer";
@@ -95,3 +97,15 @@ public int checkAndGetUserType(User user) {
 	public String getInsertQuery(String id, String pwd) {
 		return "INSERT INTO USERS(USERID, PASSWORD, USER_TYPE) VALUES (" + id + ", " + pwd + ")";
 	}
+	
+}
+
+
+
+
+
+
+
+	
+	
+	
