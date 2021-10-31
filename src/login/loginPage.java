@@ -1,8 +1,11 @@
 package login;
 import mainMenu.mainMenu;
 import user.user;
-import admin.adminLanding.adminLanding;
+
 import java.util.*;
+
+import admin.adminLanding.adminLanding;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -22,6 +25,7 @@ public class loginPage
 		int choice=0;
 		Scanner sc=new Scanner(System.in);
 		loginPage lp=new loginPage();
+		adminLanding admin=new adminLanding();
 		while(choice<=1 && choice>=0)
 		{
 			choice=lp.display();	
@@ -49,11 +53,12 @@ public class loginPage
 					if(userType==1)
 					{
 						//admin
-						lp.adminLanding();
+						admin.adminLandingFunct();
 					}
 					else if(userType==2)
 					{
 						//Brand
+						
 					}
 					else
 					{
