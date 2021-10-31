@@ -1,20 +1,20 @@
 package brand;
 
 import java.util.*;
-import brand.brandLanding.loyaltyProgram;
+import brand.brandLanding_pck.loyaltyProgram;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class brandPage{
+public class brandLanding{
 	
-	public brandPage()
+	public brandLanding()
 	{
 		//conn = ConnectionObj.getConnection();	
 	}
-	public void display {
+	public void display() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("--------------------------------------------");
 		System.out.println("Brand Page");
