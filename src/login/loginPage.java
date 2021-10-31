@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 public class loginPage
 {
 	ResultSet rs=null;
@@ -18,18 +19,26 @@ public class loginPage
 	public static void Main(String args)
 	{
 		Scanner sc=new Scanner(System.in);
-		System.out.println("1.Sign In");
-		System.out.println("2.Go Back");
+		loginPage lp=new loginPage();
+		lp.display();
 		int choice=sc.nextInt();
 		switch(choice)
 		{
 			case 1:
 			String username=sc.nextLine();
 			String password=sc.nextLine();
-			User user=new User();
-			user.setUserId(username);
-			user.setPassword(password)
-			validate(user);
+			user User=new user();
+			User.setUserId(username);
+			User.setPassword(password);
+			try 
+			{
+				lp.validate(User);
+			}
+			catch (SQLException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			break;
 			case 2://go to main menu
@@ -39,7 +48,7 @@ public class loginPage
 	
 	
 	
-	public int validate(User user) throws SQLException
+	public int validate(user User) throws SQLException
 	{
 		String select_user_query=generateSelectQuery();
 		Statement stmt=conn.createStatement();  
@@ -54,10 +63,10 @@ public class loginPage
 	
 	
 	
-	public int checkAndGetUserType(User user) {
+	public int checkAndGetUserType(user User) {
 			
-			String userId = user.getUserId();
-			String password = user.getPassword();
+			String userId = User.getUserId();
+			String password = User.getPassword();
 	//		String address = user.getRole();
 			
 			String insert_user_query = getInsertQuery(userId, password);
@@ -96,6 +105,13 @@ public class loginPage
 	
 	public String getInsertQuery(String id, String pwd) {
 		return "INSERT INTO USERS(USERID, PASSWORD, USER_TYPE) VALUES (" + id + ", " + pwd + ")";
+	}
+	
+	
+	public void display()
+	{
+		System.out.println("1.Sign In");
+		System.out.println("2.Go Back");		
 	}
 	
 }
