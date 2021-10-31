@@ -1,15 +1,9 @@
 package login;
 import mainMenu.mainMenu;
 import user.user;
-
 import java.util.*;
-
-<<<<<<< HEAD
 import connection.ConnectionObj;
-=======
 import admin.adminLanding.adminLanding;
->>>>>>> 89d8b89b7beefa8b1bd0ee79a388828b3f843a6c
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -24,11 +18,7 @@ public class loginPage
 	{
 		//conn = ConnectionObj.getConnection();	
 	}
-<<<<<<< HEAD
-	public static void loginPageFunc(String args)
-=======
 	public static void loginPageFunc()
->>>>>>> 89d8b89b7beefa8b1bd0ee79a388828b3f843a6c
 	{
 		int choice=0;
 		Scanner sc=new Scanner(System.in);
