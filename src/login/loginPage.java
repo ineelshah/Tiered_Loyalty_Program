@@ -2,6 +2,9 @@ package login;
 import mainMenu.mainMenu;
 import user.user;
 import java.util.*;
+
+import connection.ConnectionObj;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -16,7 +19,7 @@ public class loginPage
 	{
 		conn = ConnectionObj.getConnection();	
 	}
-	public static void Main(String args)
+	public static void loginPageFunc(String args)
 	{
 		Scanner sc=new Scanner(System.in);
 		loginPage lp=new loginPage();
