@@ -1,7 +1,8 @@
 package login;
 import mainMenu.mainMenu;
 import user.user;
-import brand.brandLanding.brandLanding;
+import brand.*;
+import user.userLanding.*;
 import java.util.*;
 //import connection.ConnectionObj;
 import admin.adminLanding.adminLanding;
@@ -26,14 +27,15 @@ public class loginPage
 		Scanner sc=new Scanner(System.in);
 		loginPage lp=new loginPage();
 		adminLanding admin=new adminLanding();
-		brandLanding brand=new brandLanding();
+		brand Brand=new brand();
+		System.out.println("Enter username and password");
 		String username=sc.nextLine();
 		String password=sc.nextLine();
 		user User=new user();
 		User.setUserId(username);
 		User.setPassword(password);
 		boolean userPresent=true;
-		try 
+		/*try 
 		{
 			userPresent=lp.validate(User);
 		}
@@ -41,23 +43,23 @@ public class loginPage
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		if(userPresent)
 		{
 			int userType=lp.checkAndGetUserType(User);
 			if(userType==1)
 			{
-				//admin
-				admin.adminLandingFunct();
+				admin.display();
 			}
 			else if(userType==2)
 			{
-				//Brand
-				brand.brandLandingFunct();
+				//Brand.display();
 			}
 			else
 			{
 				//customer
+				userLanding usrland=new userLanding();
+				usrland.display();
 			}
 		}
 	}

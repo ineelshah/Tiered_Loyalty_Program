@@ -4,5 +4,11 @@ public class adminLanding {
 	{
 		
 	}
+	
+	public void display()
+	{
+		System.out.println("adminLanding Page");
+
+	}
 
 }
