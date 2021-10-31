@@ -1,4 +1,4 @@
-package userLanding;
+package user.userLanding;
 
 public class userLanding {
 

@@ -1,9 +1,6 @@
-/login/
-/user/
-/mainMenu/
-/admin/
-/brand/
 /userLanding/
-/signUp/
-/connection/
+/userLandingpck/
+/user/
 /sampleQueries/
+/login/
+/brand/

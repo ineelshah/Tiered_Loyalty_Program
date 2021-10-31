@@ -6,10 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/neels/eclipse-workspace/ojdbc7.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/ameya/Downloads/ojdbc10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
