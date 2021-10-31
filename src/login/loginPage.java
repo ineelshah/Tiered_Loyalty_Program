@@ -1,6 +1,7 @@
 package login;
 import mainMenu.mainMenu;
 import user.user;
+import admin.adminLanding.adminLanding;
 import java.util.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,41 +15,62 @@ public class loginPage
 	Connection conn = null;
 	public loginPage()
 	{
-		conn = ConnectionObj.getConnection();	
+		//conn = ConnectionObj.getConnection();	
 	}
-	public static void Main(String args)
+	public static void loginPageFunc()
 	{
+		int choice=0;
 		Scanner sc=new Scanner(System.in);
 		loginPage lp=new loginPage();
-		lp.display();
-		int choice=sc.nextInt();
-		switch(choice)
+		while(choice<=1 && choice>=0)
 		{
-			case 1:
-			String username=sc.nextLine();
-			String password=sc.nextLine();
-			user User=new user();
-			User.setUserId(username);
-			User.setPassword(password);
-			try 
+			choice=lp.display();	
+			switch(choice)
 			{
-				lp.validate(User);
+				case 1:
+				String username=sc.nextLine();
+				String password=sc.nextLine();
+				user User=new user();
+				User.setUserId(username);
+				User.setPassword(password);
+				boolean userPresent=true;
+				try 
+				{
+					userPresent=lp.validate(User);
+				}
+				catch (SQLException e) 
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(userPresent)
+				{
+					int userType=lp.checkAndGetUserType(User);
+					if(userType==1)
+					{
+						//admin
+						lp.adminLanding();
+					}
+					else if(userType==2)
+					{
+						//Brand
+					}
+					else
+					{
+						//customer
+					}
+				}
+				break;
+				case 2://go to main menu
+						break;
 			}
-			catch (SQLException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			break;
-			case 2://go to main menu
-					break;
 		}
+		
 	}
 	
 	
 	
-	public int validate(user User) throws SQLException
+	public boolean validate(user User) throws SQLException
 	{
 		String select_user_query=generateSelectQuery();
 		Statement stmt=conn.createStatement();  
@@ -57,7 +79,7 @@ public class loginPage
 		{
 			System.out.println(rs.getString("CUSTOMERID"));
 		}
-		return 0;
+		return true;
 	}
 	
 	
@@ -108,10 +130,13 @@ public class loginPage
 	}
 	
 	
-	public void display()
+	public int display()
 	{
+		Scanner sc=new Scanner(System.in);
 		System.out.println("1.Sign In");
-		System.out.println("2.Go Back");		
+		System.out.println("2.Go Back");
+		int choice=sc.nextInt();
+		return choice;
 	}
 	
 }

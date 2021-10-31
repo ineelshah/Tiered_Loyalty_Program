@@ -30,7 +30,7 @@ public class mainMenu {
 			switch(mainInput) {
 				case 1:
 					loginPage loginInstance = new loginPage();
-					loginInstance.displayLoginMenu();
+					loginInstance.display();
 					break;
 			}	
 			
