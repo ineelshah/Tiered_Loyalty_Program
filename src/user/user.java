@@ -2,6 +2,7 @@ package user;
 public class user 
 {
 	private String userId;
+	private String username;
 	private String password;
 	private String phoneNumber;
 	private String address;
@@ -36,6 +37,14 @@ public class user
 		this.role = role;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public String getUserId() 
 	{
 		return userId;

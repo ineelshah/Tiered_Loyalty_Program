@@ -3,6 +3,8 @@ import java.util.*;
 import signUp.registrationPage;
 import brand.brand;
 import login.loginPage;
+
+//done
 public class brandSignUp
 {
 	public boolean addBrandToDb(brand b)

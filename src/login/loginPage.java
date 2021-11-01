@@ -11,7 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+//done
 public class loginPage
 {
 	ResultSet rs=null;
@@ -27,7 +27,7 @@ public class loginPage
 		Scanner sc=new Scanner(System.in);
 		loginPage lp=new loginPage();
 		adminLanding admin=new adminLanding();
-		brand Brand=new brand();
+		brandLanding Brand=new brandLanding();
 		System.out.println("Enter username and password");
 		String username=sc.nextLine();
 		String password=sc.nextLine();
@@ -53,7 +53,7 @@ public class loginPage
 			}
 			else if(userType==2)
 			{
-				//Brand.display();
+				Brand.display();
 			}
 			else
 			{
