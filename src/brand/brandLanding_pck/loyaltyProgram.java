@@ -26,27 +26,41 @@ public class loyaltyProgram {
 		System.out.println("Enter the loyalty program name");
 		String loyalty_name  = sc.nextLine();
 		brand br = new brand();
-		br.setlp_name(loyalty_name);
+		//br.setlp_name(loyalty_name);
 		
-		addBrandName(br.getUnique_id(),br.getlp_name());
+		// add Brand to the database addBrandName(br.getUnique_id(),br.getlp_name());
 		
 		System.out.println("Loyalty program added to the database");
+		
+		getLoyaltyProgram glp = new getLoyaltyProgram();
+		//String lp_id = glp.getProgram_id();
+		
 		System.out.println("Please select an option from the menu:");
 		System.out.println("1. Regular");
 		System.out.println("2. Tier");
 		System.out.println("3. Go Back");
 		
+		
+		
 		int choices = sc.nextInt();
 		switch(choices)
 		{
 		case 1: 
-			regular regularinstance = new regular();
-			regularinstance.display();
+			regular rginstance = new regular();
+			String a = "regular";
+			glp.setProgram_type(a);
+			String lp_id = br.getLp_id();
+			//String br_id = br.getUnique_id();
+			rginstance.display(lp_id);
 			break;
 		
 		case 2:
 			tier tierinstance = new tier();
-			tierinstance.display();
+			String a = "tier";
+			glp.setProgram_type(a);
+			String lp_id1 = br.getLp_id();
+			String br_id1 = br.getUnique_id();
+			tierinstance.display(br);
 			break;
 		case 3:
 			brandLanding brandLandinginstance = new brandLanding();

@@ -1,5 +1,7 @@
 package brand.brandLanding_pck.loyaltyProgramModules.tier;
 import java.util.*;
+
+import brand.brand;
 import brand.brandLanding_pck.loyaltyProgramModules.regular.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +13,7 @@ public class tier {
 		public tier() {
 			
 		}
-		public void display() {
+		public void display(brand b) {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("--------------------------------------------");
 			System.out.println("Tier Page");
@@ -24,15 +26,15 @@ public class tier {
 			switch(choice)
 			{
 			case 1: 
-				tierSetup tierSetupinstance = new tierSetupinstance();
-				tierSetupinstance.display();
+				tierSetup tierSetupinstance = new tierSetup();
+				tierSetupinstance.display(b);
 			case 2:
 				activityTypes activityTypeinstance = new activityTypes();
-				activityTypeinstance.display();
+				activityTypeinstance.display(lp_id);
 				break;
 			case 3:
 				rewardTypes rewardTypesinstance = new rewardTypes();
-				rewardTypesinstance.display();
+				rewardTypesinstance.display(lp_id);
 				break;
 			case 4: 
 				return;

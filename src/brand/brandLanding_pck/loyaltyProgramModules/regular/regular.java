@@ -1,5 +1,7 @@
 package brand.brandLanding_pck.loyaltyProgramModules.regular;
 import java.util.*;
+
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,7 +13,7 @@ public class regular{
 	public regular() {
 		
 	}
-	public void display() {
+	public void display(String lp_id) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("--------------------------------------------");
 		System.out.println("Regular Page");
@@ -19,16 +21,16 @@ public class regular{
 		System.out.println("1. Add Activity Types");
 		System.out.println("2. Add Reward Types");
 		System.out.println("3. Go Back");
-		int choice= sc.nextInt();
+		int choice= sc.nextInt();	
 		switch(choice)
 		{
 		case 1:
 			activityTypes activityTypeinstance = new activityTypes();
-			activityTypeinstance.display();
+			activityTypeinstance.display(lp_id);
 			break;
 		case 2:
 			rewardTypes rewardTypesinstance = new rewardTypes();
-			rewardTypesinstance.display();
+			rewardTypesinstance.display(lp_id);
 			break;
 		case 3: 
 			return;
