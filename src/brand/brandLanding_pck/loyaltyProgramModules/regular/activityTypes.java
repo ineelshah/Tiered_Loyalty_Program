@@ -1,7 +1,8 @@
-package brand;
+package brand.brandLanding_pck.loyaltyProgramModules.regular;
 
 import java.util.*;
-import brand.brandLanding_pck.loyaltyProgram;
+import brand.brandLanding_pck.loyaltyProgramModules.*;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,7 +24,7 @@ public class activityTypes{
 		System.out.println("3. Refer a friend");
 		System.out.println("4. Go Back");
 		System.out.println("--------------------------------------------");
-		
+		String 
 		int choice= sc.nextInt();
 		switch(choice)
 		{
@@ -39,7 +40,7 @@ public class activityTypes{
 			brandReferFriend brandReferFriendinstance = new brandReferFriend();
 			brandReferFriendinstance.display();
 			break;
-		case 4;
+		case 4:
 			regular regularinstance = new regular();
 			regularinstance.display();
 			break;

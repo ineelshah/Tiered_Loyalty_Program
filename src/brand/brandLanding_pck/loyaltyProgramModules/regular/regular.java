@@ -1,7 +1,5 @@
 package brand.brandLanding_pck.loyaltyProgramModules.regular;
-import brand.*;
 import java.util.*;
-import brand.brandLanding_pck.loyaltyProgramModules.regular.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -34,5 +32,6 @@ public class regular{
 			break;
 		case 3: 
 			return;
+		}
 	}
 }

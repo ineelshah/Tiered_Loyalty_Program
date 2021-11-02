@@ -2,6 +2,7 @@ package brand;
 
 import java.util.*;
 import brand.brandLanding_pck.loyaltyProgram;
+import brand.brandLanding_pck.*;
 import mainMenu.mainMenu;
 
 import java.sql.Connection;
@@ -16,7 +17,7 @@ public class brandLanding{
 	{
 		//conn = ConnectionObj.getConnection();	
 	}
-	public void display() {
+	public void display(brand b) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("--------------------------------------------");
 		System.out.println("Brand Page");
@@ -35,36 +36,32 @@ public class brandLanding{
 		{
 		case 1:
 			loyaltyProgram loyaltyprogramInstance = new loyaltyProgram();
-			loyaltyprogramInstance.display();
+			loyaltyprogramInstance.display(b);
 			break;
 		case 2:
 			addRErules addreRulesinstance = new addRErules();
-			addreRulesinstance.display();
+			addreRulesinstance.display(b);
 			break;
 		case 3:
 			updateRErules updateRErulesinstance = new updateRErules();
-			updateRErulesinstance.display();
+			updateRErulesinstance.display(b);
 			break;
 		case 4:
 			addRRrules addRRrulesinstance = new addRRrules();
-			addRRrulesinstance.display();
+			addRRrulesinstance.display(b);
 			break;
 		case 5:
 			updateRRrules updateRRrulesinstance = new updateRRrules();
-			updateRRrulesinstance.display();
+			updateRRrulesinstance.display(b);
 			break;
 		case 6:
 			validateLoyaltyProgram validateLoyaltyPrograminstance = new validateLoyaltyProgram();
-			validateLoyaltyPrograminstance.display();
+			validateLoyaltyPrograminstance.display(b);
 			break;
 		case 7: 
 			mainMenu mainMenuInstance = new mainMenu();
-			display();
+			mainMenu.display();
 		}
-	}
-	
-	public static void brandPageFunc() {
-			
 	}
 	
 }

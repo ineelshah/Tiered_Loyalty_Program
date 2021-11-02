@@ -16,15 +16,21 @@ public class loyaltyProgram {
 	public loyaltyProgram() {
 		
 	}
-	public void display() {
+	public void addBrandName(String id,String name) {
+		//query to insert Brand name into database
+	}
+	public void display(brand b) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("--------------------------------------------");
-		System.out.println("Loyalty Program");
+		System.out.println("Add Loyalty Program");
 		System.out.println("Enter the loyalty program name");
 		String loyalty_name  = sc.nextLine();
-		brand b = new brand();
-		b.setlp_name(loyalty_name);
+		brand br = new brand();
+		br.setlp_name(loyalty_name);
 		
+		addBrandName(br.getUnique_id(),br.getlp_name());
+		
+		System.out.println("Loyalty program added to the database");
 		System.out.println("Please select an option from the menu:");
 		System.out.println("1. Regular");
 		System.out.println("2. Tier");
@@ -44,7 +50,7 @@ public class loyaltyProgram {
 			break;
 		case 3:
 			brandLanding brandLandinginstance = new brandLanding();
-			brandLandinginstance.display();
+			brandLandinginstance.display(b);
 		}
 		}
 		
