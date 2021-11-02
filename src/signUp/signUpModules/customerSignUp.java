@@ -1,16 +1,20 @@
 package signUp.signUpModules;
 import java.util.Scanner;
-import java.util.concurrent.*;
-
 import user.user;
 import login.loginPage;
 import signUp.registrationPage;
 public class customerSignUp
+//done
 {
-	public boolean addBrandToDb(brand b)
+	public boolean addCustomerToDb(user u)
 	{
 		//write sql for inserting a new brand into the database
 		return true;
+	}
+	public String generateWalletId(user usr)
+	{
+		//write query to return wallet id for the corressponding user
+		return null;
 	}
 	public void customerFunct()
 	{
@@ -28,10 +32,14 @@ public class customerSignUp
 		usr.setUserId(customerId);
 		usr.setUsername(customerName);
 		usr.setAddress(address);
-		
-		boolean brandAdded=addBrandToDb(b);
-		//if brand is added successfully navigate to login page
-		if(brandAdded)
+		usr.setPhoneNumber(phoneNumber);
+		//generate wallet id for user
+		String walletId=generateWalletId(usr);
+		usr.setWalletId(walletId);
+		customerSignUp currentUsr=new customerSignUp();
+		boolean userAdded=currentUsr.addCustomerToDb(usr);
+		//if customer is added successfully navigate to login page
+		if(userAdded)
 		{
 			loginPage lg=new loginPage();
 			lg.display();

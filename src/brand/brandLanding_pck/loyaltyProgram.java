@@ -1,4 +1,4 @@
-package brand;
+package brand.brandLanding_pck;
 import java.util.*;
 import brand.brandLanding.*;
 import java.sql.Connection;
