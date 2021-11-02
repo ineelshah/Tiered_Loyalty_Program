@@ -19,7 +19,7 @@ public class adminLandingPage
 		{
 			case 1:
 				addBrand addBrandObj=new addBrand();
-				addbrandObj.display();
+				addBrandObj.display();
 				break;
 			case 2:
 				addCustomer addCustomerObj=new addCustomer();
@@ -27,11 +27,11 @@ public class adminLandingPage
 				break;
 			case 3:
 				showBrandInfo showBrandInfoObj=new showBrandInfo();
-				showBrandInfo.display();
+				showBrandInfoObj.display();
 				break;
 			case 4:
 				showCustomerInfo showCustomerInfoObj=new showCustomerInfo();
-				showCustomerInfo.display();
+				showCustomerInfoObj.display();
 				break;
 			case 5:
 				addActivityType addActivityTypeObj=new addActivityType();
