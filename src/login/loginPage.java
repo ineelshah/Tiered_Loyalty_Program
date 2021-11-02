@@ -5,7 +5,7 @@ import brand.*;
 import user.userLanding.*;
 import java.util.*;
 //import connection.ConnectionObj;
-import admin.adminLanding.adminLanding;
+import admin.adminLandingPage;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -26,7 +26,7 @@ public class loginPage
 	{
 		Scanner sc=new Scanner(System.in);
 		loginPage lp=new loginPage();
-		adminLanding admin=new adminLanding();
+		adminLandingPage admin=new adminLandingPage();
 		brandLanding Brand=new brandLanding();
 		System.out.println("Enter username and password");
 		String username=sc.nextLine();
