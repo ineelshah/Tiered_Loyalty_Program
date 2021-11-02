@@ -13,7 +13,7 @@ public class customerSignUp
 	}
 	public String generateWalletId(user usr)
 	{
-		//write query to return wallet id for the corressponding user
+		//write query to return wallet id for the corresponding user
 		return null;
 	}
 	public void customerFunct()
