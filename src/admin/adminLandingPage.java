@@ -43,7 +43,7 @@ public class adminLandingPage
 				break;
 			case 7:
 				//log out and go to home page
-				mainMenu.display();
+//				mainMenu.display();
 				break;
 		}
 	}
