@@ -20,14 +20,22 @@ public class userLanding {
 		{
 			case 1:
 				// Enroll in loyalty program
+				LoyaltyProgram lProgram = new LoyaltyProgram();
+				lProgram.display(u);
 				break;
 			case 2:
 				//
+				Activity activity = new Activity();
+				activity.display(u);
 				break;
 			case 3:
 				//
+				Wallet wallet = new Wallet();
+				wallet.display(u);
 				break;
 			case 4:
+				Reward reward = new Reward();
+				reward.display(u);
 				//
 				break;
 			case 5:
