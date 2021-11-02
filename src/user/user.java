@@ -7,6 +7,24 @@ public class user
 	private String phoneNumber;
 	private String address;
 	private String walletId;
+	private String firstName;
+	private String lastName;
+	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
 	public String getWalletId() {
 		return walletId;
@@ -43,6 +61,7 @@ public class user
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getUserId() 
 	{
 		return userId;

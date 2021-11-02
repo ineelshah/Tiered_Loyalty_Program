@@ -3,7 +3,7 @@ package user.userLanding;
 import java.util.Scanner;
 
 import user.user;
-
+import user.user;
 public class LoyaltyProgram {
 	
 //	public LoyaltyProgram() {
