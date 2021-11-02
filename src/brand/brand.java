@@ -5,6 +5,14 @@ public class brand
 	private String name;
 	private String address;
 	private String join_date;
+	private String lp_name;
+	
+	public String getlp_name() {
+		return lp_name;
+	}
+	public void setlp_name(String lp_name) {
+		this.lp_name = lp_name;
+	}
 	public String getUnique_id(){
 		return unique_id;
 	}
