@@ -3,6 +3,7 @@ public class brand
 {
 	private String unique_id;
 	private String name;
+	private String password;	
 	private String address;
 	private String join_date;
 	private String lp_name;
@@ -37,4 +38,11 @@ public class brand
 	public void setJoin_date(String join_date) {
 		this.join_date = join_date;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 }

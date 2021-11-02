@@ -1,5 +1,5 @@
 package brand.brandLanding_pck.loyaltyProgramModules.tier;
-package brand.*;
+
 import java.util.*;
 import brand.brandLanding_pck.loyaltyProgramModules.regular.*;
 import java.sql.Connection;

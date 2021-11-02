@@ -26,10 +26,10 @@ public class regular{
 			activityTypes activityTypeinstance = new activityTypes();
 			activityTypeinstance.display();
 			break;
-		case 2:
-			rewardTypes rewardTypesinstance = new rewardTypes();
-			rewardTypesinstance.display();
-			break;
+//		case 2:
+//			rewardTypes rewardTypesinstance = new rewardTypes();
+//			rewardTypesinstance.display();
+//			break;
 		case 3: 
 			return;
 		}

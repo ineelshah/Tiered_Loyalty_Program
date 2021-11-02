@@ -1,7 +1,9 @@
 package user.userLanding;
 import java.util.*;
+
+import user.user;
 public class userLanding {
-	public void display() {
+	public void display(user u) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("--------------------------------------------");
 		System.out.println("Customer Page");

@@ -24,13 +24,13 @@ public class activityTypes{
 		System.out.println("3. Refer a friend");
 		System.out.println("4. Go Back");
 		System.out.println("--------------------------------------------");
-		String 
+
 		int choice= sc.nextInt();
 		switch(choice)
 		{
 		case 1:
 			brandPurchase brandPurchaseinstance = new brandPurchase();
-			brandPurchaseinstance.display();
+//			brandPurchaseinstance.display();
 			break;
 		case 2:
 			brandLeaveReview brandLeaveReviewinstance = new brandLeaveReview();
@@ -44,6 +44,7 @@ public class activityTypes{
 			regular regularinstance = new regular();
 			regularinstance.display();
 			break;
+
 		}
 	}
 }

@@ -23,17 +23,17 @@ public class tier {
 			int choice= sc.nextInt();
 			switch(choice)
 			{
-			case 1: 
-				tierSetup tierSetupinstance = new tierSetupinstance();
-				tierSetupinstance.display();
+//			case 1: 
+//				tierSetup tierSetupinstance = new tierSetupinstance();
+//				tierSetupinstance.display();
 			case 2:
 				activityTypes activityTypeinstance = new activityTypes();
 				activityTypeinstance.display();
 				break;
-			case 3:
-				rewardTypes rewardTypesinstance = new rewardTypes();
-				rewardTypesinstance.display();
-				break;
+//			case 3:
+//				rewardTypes rewardTypesinstance = new rewardTypes();
+//				rewardTypesinstance.display();
+//				break;
 			case 4: 
 				return;
 			}

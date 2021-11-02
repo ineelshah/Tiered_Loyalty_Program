@@ -50,9 +50,8 @@ public class loyaltyProgram {
 			break;
 		case 3:
 			brandLanding brandLandinginstance = new brandLanding();
-			brandLandinginstance.display(b);
+//			brandLandinginstance.display(b);
 		}
 		}
 		
-	}
 }
