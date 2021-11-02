@@ -1,5 +1,7 @@
 package admin.adminLanding;
 import java.util.*;
+
+import admin.adminLandingPage;
 import rewardTypepck.rewardType;
 public class addRewardType
 {
@@ -26,6 +28,12 @@ public class addRewardType
 			case 1:
 				addRewardType art=new addRewardType();
 				art.addRewardToDb(rew);
+				art.display();
+				break;
+			case 2:
+				adminLandingPage alp=new adminLandingPage();
+				alp.display();
+				break;
 		}
 	}
 
