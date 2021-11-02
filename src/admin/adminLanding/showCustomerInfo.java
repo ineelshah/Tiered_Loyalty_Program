@@ -6,6 +6,7 @@ import admin.adminLandingPage;
 
 public class showCustomerInfo
 {
+	//done
 	public void show(String customerId)
 	{
 		//get customer information on the basis of customerId

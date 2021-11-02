@@ -25,40 +25,49 @@ public class mainMenu {
 		display();
 		Scanner sc = new Scanner(System.in);
 		int mainInput = 0;
+
+		mainInput = Integer.valueOf(sc.nextLine());
 		
 		while(mainInput != 4) {
-			mainInput = sc.nextInt();
 			boolean exitFlag = false;
+			boolean returnedFromAJourney = false;
 			switch(mainInput) {
 				case 1:
 					loginPage loginInstance = new loginPage();
 					loginInstance.display();
+					returnedFromAJourney = true;
 					break;
 				case 2:
 					registrationPage registrationInstance = new registrationPage();
-//					registrationInstance.display();
+					registrationInstance.display();
+					returnedFromAJourney = true;
 					break;
 				case 3:
 					ShowQueries showQueriesInstance = new ShowQueries();
 //					showQueriesInstance.display();
+					returnedFromAJourney = true;
 					break;
 				default:
 					System.out.println("Exiting program.");
 					exitFlag = true;
+					returnedFromAJourney = true;
 					break;
 			}	
+
+			display();
+			System.out.println("Input choice:");
+			mainInput = Integer.valueOf(sc.nextLine());
+
 			
-			if(!exitFlag) {
-				display();
-				mainInput = sc.nextInt();
-			}			
-			
+			if(exitFlag) {
+				break;
+			}
+				
 		}
 
 		
 		
 		
-		sc.close();
 		System.out.println("Program Terminated.");
 	}
 }
