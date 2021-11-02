@@ -7,6 +7,15 @@ public class user
 	private String phoneNumber;
 	private String address;
 	private String walletId;
+
+	public String getWalletId() {
+		return walletId;
+	}
+
+	public void setWalletId(String walletId) {
+		this.walletId = walletId;
+	}
+
 	public String getPhoneNumber() 
 	{
 		return phoneNumber;
@@ -27,23 +36,12 @@ public class user
 		this.address = address;
 	}
 	
-	
-	
 	public String getUsername() {
 		return username;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-	public String getWalletId() 
-	{
-		return userId;
-	}
-	
-	public void setWalletId(String userId) 
-	{
-		this.userId = userId;
 	}
 	public String getUserId() 
 	{

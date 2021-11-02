@@ -59,7 +59,7 @@ public class loginPage
 			{
 				//customer
 				userLanding usrland=new userLanding();
-				usrland.display();
+				usrland.display(User);
 			}
 		}
 	}
