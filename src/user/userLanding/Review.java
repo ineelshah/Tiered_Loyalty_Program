@@ -12,7 +12,7 @@ public class Review {
 	
 	//	public void addToWallet(user u, int programId, int activityId, String giftCardCode, int amount) {}
 		
-	public void display(user u, int programId, int activityId) {
+	public void display(user u, String programId, int activityId) {
 			
 			
 			Scanner sc = new Scanner(System.in);
