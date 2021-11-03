@@ -10,6 +10,7 @@ public class validateLoyaltyProgram {
 	public void display(brand b) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 	
 }

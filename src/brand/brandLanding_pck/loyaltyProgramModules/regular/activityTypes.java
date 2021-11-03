@@ -1,8 +1,6 @@
 package brand.brandLanding_pck.loyaltyProgramModules.regular;
 
 import java.util.*;
-import brand.brandLanding_pck.loyaltyProgramModules.*;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -14,7 +12,7 @@ public class activityTypes{
 		
 	}
 
-	public void display() {
+	public void display(String lp_id) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("--------------------------------------------");
 		System.out.println("Activity Page");
@@ -24,27 +22,22 @@ public class activityTypes{
 		System.out.println("3. Refer a friend");
 		System.out.println("4. Go Back");
 		System.out.println("--------------------------------------------");
-
 		int choice= sc.nextInt();
 		switch(choice)
 		{
 		case 1:
-			brandPurchase brandPurchaseinstance = new brandPurchase();
-//			brandPurchaseinstance.display();
+			// add the activity_id to the database table REGULAR_LP_ACTIVITY add_activity(lp_id,choice)
 			break;
 		case 2:
-			brandLeaveReview brandLeaveReviewinstance = new brandLeaveReview();
-			brandLeaveReviewinstance.display();
+		    // add the activity_id to the database table REGULAR_LP_ACTIVITY add_activity(lp_id,choice)
 			break;
 		case 3:
-			brandReferFriend brandReferFriendinstance = new brandReferFriend();
-			brandReferFriendinstance.display();
+			// add the activity_id to the database table REGULAR_LP_ACTIVITY add_activity(lp_id,choice)
 			break;
 		case 4:
 			regular regularinstance = new regular();
-			regularinstance.display();
+			regularinstance.display(br_id,lp_id);
 			break;
-
 		}
 	}
 }
