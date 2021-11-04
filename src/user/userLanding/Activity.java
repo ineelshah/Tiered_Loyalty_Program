@@ -11,16 +11,16 @@ import user.user;
 
 public class Activity {
 	
-	static ResultSet rs=null;
 	static Connection conn = null;
 	
 	public Activity() {
+		super();
 		conn = ConnectionObj.getConnection();
 	}
 	
 	public void getLoyaltyProgram(String userId) {
-		
-		String query = "SELECT LOYALTY_PROGRAM_ID FROM WALLET_TRANSACTIONS WHERE WALLETID="+"'"+userId+"'";
+		ResultSet rs=null;
+		String query = "SELECT DISTINCT LOYALTY_PROGRAM_ID FROM WALLET_TRANSACTIONS WHERE WALLETID="+"'"+userId+"'";
 		Statement stmt = null;
 		try {
 			stmt = conn.createStatement();
@@ -46,6 +46,7 @@ public class Activity {
 	}
 	
 	public String getActivityName(String activityId) {
+		ResultSet rs=null;
 		String activityName="";
 		String query = "SELECT ACTIVITY_NAME FROM ACTIVITY WHERE ACTIVITY_CODE="+"'"+activityId+"'";
 		Statement stmt = null;
@@ -61,10 +62,10 @@ public class Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+		
 		try {
 			while(rs.next()) {
 				activityName = rs.getString("ACTIVITY_NAME");
-				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -73,7 +74,7 @@ public class Activity {
 		return activityName;
 	}
 	public void getActivity(String programId) {
-		
+		ResultSet rs=null;
 		String query = "SELECT ACTIVITYID FROM LP_ACTIVITY WHERE PROGRAMID="+"'"+programId+"'";
 		Statement stmt = null;
 		try {
@@ -90,7 +91,6 @@ public class Activity {
 		} 
 		try {
 			while(rs.next()) {
-				System.out.println("HELLO");
 				String activityId = rs.getString("ACTIVITYID");
 				String activityName = getActivityName(activityId);
 				System.out.println(activityId+'.'+activityName);
@@ -125,21 +125,21 @@ public class Activity {
 				//purchase
 				System.out.println("Purchase");
 				Purchase purchase = new Purchase();
-				//purchase.display(u, programId, activityId);
+				purchase.display(u, programId);
 				
 				break;
 			case 2:
 				//leave review
 				System.out.println("Review");
 				Review review = new Review();
-				//review.display(u, programId, activityId);
+				review.display(u, programId);
 				
 				break;
 			case 3:
 				//refer friend
 				System.out.println("Friend");
 				Friend friend = new Friend();
-				//friend.display(u, programId, activityId);
+				friend.display(u, programId);
 				
 				break;
 			case 4:

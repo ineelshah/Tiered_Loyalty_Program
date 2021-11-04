@@ -1,18 +1,59 @@
 package user.userLanding;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 
+import connection.ConnectionObj;
 import user.user;
 
 public class Review {
 	
-//	public Review() {
-//		
-//	}
+static Connection conn = null;
 	
-	//	public void addToWallet(user u, int programId, int activityId, String giftCardCode, int amount) {}
+	public Review() {
+		conn = ConnectionObj.getConnection();
+	}
+
+	public void addToReview(String programId, String reviewId, String reviewString) {
 		
-	public void display(user u, String programId, int activityId) {
+		String query = "INSERT INTO LEAVEREVIEW VALUES('" + reviewId + "', '" + programId + "', '" + reviewString + "', null)";
+		Statement stmt = null;
+		ResultSet rs=null;
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		try {
+			rs=stmt.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	public void addToWallet(String walletId, String programId, String reviewId) {
+		String query = "INSERT INTO WALLET_TRANSACTIONS VALUES('" + walletId + "','" + programId + "', '" + reviewId + "', '" + null + "', '"+ null + "', '" + null + "','LEAVEREVIEW')";
+		Statement stmt = null;
+		ResultSet rs=null;
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		try {
+			rs=stmt.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+		
+	public void display(user u, String programId) {
 			
 			
 			Scanner sc = new Scanner(System.in);
@@ -29,6 +70,12 @@ public class Review {
 				case 1:
 					// add transaction to wallet table
 					// addToWallet(u, programId, activityId, reviewString);
+					
+					String walletId = u.getUserId();
+					String reviewId = "R1"; // should be unique for every review
+					addToWallet(walletId, programId, reviewId);
+					addToReview(programId, reviewId, reviewString);
+					System.out.println("Thanks for the Review");
 					
 					Activity activity = new Activity();
 					activity.display(u);
