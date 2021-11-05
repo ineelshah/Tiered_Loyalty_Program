@@ -74,10 +74,7 @@ public class loginPage
 			admin.display();
 		} else if(userType.equals("b")) {
 			brandLanding Brand = new brandLanding();
-			brand b = new brand();
-			b.setUnique_id(User.getUserId());
-			b.setLp_id(getBrandLPIdFromBrandId(b.getUnique_id()));
-			Brand.display(b);
+			Brand.display();
 		} else if (userType.equals("c")) {
 			userLanding userland = new userLanding();
 			userland.display(User);
@@ -129,7 +126,7 @@ public class loginPage
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-//		System.out.println(userType);
+		System.out.println(userType);
 		return userType.substring(0, 1);
 		
 	}
@@ -148,29 +145,6 @@ public class loginPage
 //		return "INSERT INTO USERS(USERID, PASSWORD, USER_TYPE) VALUES (" + id + ", " + pwd + ")";
 //	}
 	
-	public static String getBrandLPIdFromBrandId(String brandId) {
-		String select_LP_query = "SELECT LP_ID FROM BRAND WHERE BRANDID = '" + brandId + "'";
-		Statement stmt = null;
-		try {
-			stmt = conn.createStatement();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}  
-		try {
-			rs2=stmt.executeQuery(select_LP_query);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}  
-		String lpId = brandId;
-		try {
-			while(rs2.next())
-				lpId = rs2.getString("LP_ID");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-//		System.out.println(lpId);
-		return lpId;
-	}
 	
 
 }
