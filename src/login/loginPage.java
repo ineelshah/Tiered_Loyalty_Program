@@ -63,18 +63,23 @@ public class loginPage
 		boolean userPresent = checkUserCredentials(User);
 		if(userPresent) {			
 			String userType = checkAndGetUserType(User);
-			callDisplayMenu(userType, User);			
+			brand BrandObj = new brand();
+			if(userType.equals("b")) {				
+				BrandObj.setUnique_id(User.getUserId());
+				callDisplayMenu(userType, User, BrandObj);				
+			}
+			callDisplayMenu(userType, User, BrandObj);			
 		}
 	}
 	
 	
-	public static void callDisplayMenu(String userType, user User) {
+	public static void callDisplayMenu(String userType, user User, brand BrandObj) {
 		if(userType.equals("a")) {
 			adminLandingPage admin = new adminLandingPage();
 			admin.display();
 		} else if(userType.equals("b")) {
 			brandLanding Brand = new brandLanding();
-			Brand.display();
+			Brand.display(BrandObj);
 		} else if (userType.equals("c")) {
 			userLanding userland = new userLanding();
 			userland.display(User);
