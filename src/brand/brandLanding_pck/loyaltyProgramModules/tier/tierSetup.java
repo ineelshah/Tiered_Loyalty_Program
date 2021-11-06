@@ -22,8 +22,8 @@ public class tierSetup {
 			pstmt.setString(1,Tiername);
 			pstmt.setString(2,points);
 			pstmt.setString(3,multiplier);
-			pstmt.setString(4,lpId);
-			pstmt.setInt(5, precedence);
+			pstmt.setString(1,lpId);
+			pstmt.setInt(2, precedence);
 			pstmt.executeUpdate();
 		}
 		catch(Exception e)

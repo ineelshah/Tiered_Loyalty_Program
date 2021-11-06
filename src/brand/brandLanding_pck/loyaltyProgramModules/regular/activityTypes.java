@@ -40,7 +40,7 @@ public class activityTypes{
 	
 	
 	
-	public void display(String lp_id) {
+	public void display(String lpId) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("--------------------------------------------");
 		System.out.println("Activity Page");
@@ -72,22 +72,25 @@ public class activityTypes{
 		case 1:
 			//handles purchase activity
 			// add the activity_id to the database table REGULAR_LP_ACTIVITY add_activity(lp_id,choice)
-			act.addToLpActivity(lp_id,"A1");
+			act.addToLpActivity(lpId,"A1");
+			act.display(lpId);
 			break;
 		case 2:
 			//handles leave a review
 		    // add the activity_id to the database table REGULAR_LP_ACTIVITY add_activity(lp_id,choice)
 			//activityTypes act=new activityTypes();
-			act.addToLpActivity(lp_id,"A2");
+			act.addToLpActivity(lpId,"A2");
+			act.display(lpId);
 			break;
 		case 3:
 			//handles refer a friend activity
 			// add the activity_id to the database table REGULAR_LP_ACTIVITY add_activity(lp_id,choice)
-			act.addToLpActivity(lp_id,"A3");
+			act.addToLpActivity(lpId,"A3");
+			act.display(lpId);
 			break;
 		case 4:
 			regular regularinstance = new regular();
-			//regularinstance.display(br_id,lp_id);
+			regularinstance.display(lpId);
 			break;
 		}
 	}

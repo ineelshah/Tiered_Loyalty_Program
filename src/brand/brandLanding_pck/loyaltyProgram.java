@@ -23,12 +23,13 @@ public class loyaltyProgram {
 	{
 		conn = ConnectionObj.getConnection();
 		PreparedStatement pstmt=null;
-		String query="INSERT into BRAND(LP_ID) values(?) where BRANDID='"+brandId+"'";
+		String query="Update BRAND set LP_ID=? where BRANDID=?";
 		
 		try 
 		{
 			pstmt=conn.prepareStatement(query);
 			pstmt.setString(1, lpId);
+			pstmt.setString(2, brandId);
 			pstmt.executeUpdate();
 		}
 		catch(Exception e)
@@ -60,8 +61,37 @@ public class loyaltyProgram {
 	}
 	public String generateLpId()
 	{
-		String lpId="LP"+String.valueOf(lpIdCounter);
-		return lpId;
+		//String lpId="LP"+String.valueOf(lpIdCounter);
+		conn = ConnectionObj.getConnection();
+		ResultSet rs=null;
+		Statement stmt=null;
+		String query="select PROGRAMID from LOYALTYPROGRAM order by PROGRAMID";
+		String temp="";
+		String finalLpId="";
+		try
+		{
+			stmt=conn.prepareStatement(query);
+			rs=stmt.executeQuery(query);
+			while(rs.next())
+			{
+				temp=rs.getString("PROGRAMID");
+			}
+			String tempId="";
+			for(int i=2;i<temp.length();i++)
+			{
+				tempId+=temp.charAt(i);
+			}
+			int Idval=Integer.parseInt(tempId);
+			//incrementing the id value
+			Idval++;
+			//appending LP prefix to it
+			finalLpId="LP"+String.valueOf(Idval);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		return finalLpId;
 	}
 	
 	public void display(brand b) {

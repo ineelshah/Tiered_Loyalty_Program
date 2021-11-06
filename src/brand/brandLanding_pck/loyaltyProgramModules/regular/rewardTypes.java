@@ -71,11 +71,13 @@ public class rewardTypes{
 			//handles Gift Card
 			// add the reward_id to the database table REGULAR_LP_REWARDS add_activity(lp_id,choice)
 			reward.addToLpRewards(lp_id,"R01",quantity);
+			reward.display(lp_id);
 			break;
 		case 2:
 			//handles Free Product
 		    // add the reward_id to the database table REGULAR_LP_REWARDS  add_activity(lp_id,choice)
 			reward.addToLpRewards(lp_id,"R02",quantity);
+			reward.display(lp_id);
 			break;
 		case 3:
 			regular regularinstance = new regular();
