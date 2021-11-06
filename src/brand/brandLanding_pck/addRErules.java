@@ -4,6 +4,8 @@ import brand.brandLanding;
 
 import java.util.*;
 import brand.brandLanding_pck.loyaltyProgramModules.regular.*;
+import connection.ConnectionObj;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,24 +13,66 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class addRErules {
+	
+		//static ResultSet rs=null;
+		static Connection conn = null;
+		
 		public addRErules() {
-			
+			conn = ConnectionObj.getConnection();
 		}
-		public static void addRule(String act_id,String rule_id,String np) {
-			// query to insert RERule
-//			Activity id  = act_id
-//			RE Rule id = rule_id
-//			no of points = np
+		public static void addRuleId(String programId, String act_id, String rule_id) {
+			ResultSet rs=null;
+			String query = "UPDATE LP_ACTIVITY SET RERULEID='"+rule_id+"' WHERE PROGRAMID='"+programId+"'AND ACTIVITYID='"+act_id+"'";
+			Statement stmt = null;
+			try {
+				stmt = conn.createStatement();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+			try {
+				rs=stmt.executeQuery(query);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		public static void addRule(String rule_id, String np) {
+			ResultSet rs=null;
+			String query1 = "INSERT INTO RE_RULE VALUES('" + rule_id + "', '" + np + "', 1)";
+			String query2 = "INSERT INTO RE_RULE_VERSION VALUES('" + rule_id + "', 1)";
+			Statement stmt = null;
+			try {
+				stmt = conn.createStatement();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+			try {
+				rs=stmt.executeQuery(query1);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				rs=stmt.executeQuery(query2);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 
 		public void display(brand b) {
 			Scanner sc = new Scanner(System.in);
-			String lp_id = b.getLp_id();
+			//String programId = b.getLp_id();
+			String programId = "LP2";
+			System.out.println("Please enter brand reward rule code:");
+			String rule_id = sc.next();
+			System.out.println("Please enter activity category:");
+			String act_id = sc.next();
 			System.out.println("Enter the number of points:");
-			String np = sc.nextLine();
-			String act_id = null; //fetch this id from database using lp_id and LoyaltyProgram Table
-			String rule_id = null; //fetch from the database.
+			String np = sc.next();
 			
 			System.out.println("--------------------------------------------");
 			System.out.println("RE Page");
@@ -40,7 +84,9 @@ public class addRErules {
 			switch(choice)
 			{
 			case 1:
-				addRule(act_id,rule_id,np);
+				addRule(rule_id,np);
+				addRuleId(programId, act_id, rule_id);
+				display(b);
 				break;
 			case 2:
 				brandLanding brandLandingInstance = new brandLanding();
@@ -50,4 +96,5 @@ public class addRErules {
 			// TODO Auto-generated method stub
 			
 		}
+}
 }

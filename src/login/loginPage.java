@@ -35,7 +35,7 @@ public class loginPage
 		User.setUserId(username);
 		User.setPassword(password);
 		boolean userPresent=true;
-		int userType = 3;
+		int userType = 2;
 		/*try 
 		{
 			userPresent=lp.validate(User);

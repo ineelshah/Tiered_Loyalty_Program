@@ -19,7 +19,7 @@ public class Friend {
 
 	public void addToReferFriend(String programId, String referId) {
 		
-		String query = "INSERT INTO PURCHASE VALUES('null','" + programId + "','null', '" + referId + "')";
+		String query = "INSERT INTO REFERFRIEND VALUES(null,'" + programId + "',null, '" + referId + "')";
 		Statement stmt = null;
 		ResultSet rs=null;
 		try {
