@@ -23,7 +23,7 @@ public class activityTypes{
 	public void addToLpActivity(String lpId,String lpCode)
 	{
 		//This function will insert lp id and code in lp_activity table
-		String query="Insert into REGULAR_LP_ACTIVITY(PROGRAMID,ACTIVITYID) values(?,?)";
+		String query="Insert into LP_ACTIVITY(PROGRAMID,ACTIVITYID) values(?,?)";
 		PreparedStatement pstmt=null;
 		try 
 		{

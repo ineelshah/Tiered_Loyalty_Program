@@ -51,7 +51,7 @@ public class Activity {
 			case 3:
 				//refer friend
 				Friend friend = new Friend();
-				friend.display(u, programId, activityId);
+				friend.display(u, String.valueOf(programId));
 				
 				break;
 			case 4:
