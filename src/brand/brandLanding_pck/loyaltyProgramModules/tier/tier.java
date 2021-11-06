@@ -13,7 +13,7 @@ public class tier {
 		public tier() {
 			
 		}
-		public void display(brand b) {
+		public void display(String lpId) {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("--------------------------------------------");
 			System.out.println("Tier Page");
@@ -27,14 +27,14 @@ public class tier {
 			{
 			case 1: 
 				tierSetup tierSetupinstance = new tierSetup();
-				tierSetupinstance.display(b);
+				tierSetupinstance.display(lpId);
 			case 2:
 				activityTypes activityTypeinstance = new activityTypes();
-				//activityTypeinstance.display(lp_id);
+				activityTypeinstance.display(lpId);
 				break;
 			case 3:
 				rewardTypes rewardTypesinstance = new rewardTypes();
-				//rewardTypesinstance.display(lp_id);
+				rewardTypesinstance.display(lpId);
 				break;
 			case 4: 
 				return;

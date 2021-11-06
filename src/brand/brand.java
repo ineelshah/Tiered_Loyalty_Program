@@ -7,7 +7,6 @@ public class brand
 	private String address;
 	private String join_date;
 	private String lp_id;
-	
 
 	public String getLp_id() {
 		return lp_id;
