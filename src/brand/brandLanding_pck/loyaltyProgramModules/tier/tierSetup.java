@@ -14,16 +14,18 @@ public class tierSetup {
 	}
 	public void insertTier(String Tiername,String points,String multiplier,String lpId,int precedence)
 	{
-		String query="Insert into LP_TIER_MAPPING values(?,?,?,?,?)";
+		String query="Insert into LP_TIER_MAPPING values(?,?,?,?,?,?)";
 		PreparedStatement pstmt=null;
+		int lpTierId=precedence;
 		try
 		{
 			pstmt=conn.prepareStatement(query);
-			pstmt.setString(1,Tiername);
-			pstmt.setString(2,points);
+			pstmt.setString(5,Tiername);
+			pstmt.setString(4,points);
 			pstmt.setString(3,multiplier);
 			pstmt.setString(1,lpId);
-			pstmt.setInt(2, precedence);
+			pstmt.setInt(2, lpTierId);
+			pstmt.setInt(6, precedence);
 			pstmt.executeUpdate();
 		}
 		catch(Exception e)
@@ -34,7 +36,7 @@ public class tierSetup {
 		
 	}
 	
-	public static void tierSetupFunc(String name[],String pt[],String mult[],
+	public void tierSetupFunc(String name[],String pt[],String mult[],
 			String lpId,int precedence[]) {
 		// write the setup part to take brand input.
 		int size= name.length;
@@ -75,8 +77,9 @@ public class tierSetup {
 		switch(choice)
 		{
 		case 1:
-			tierSetupFunc(name,pt,mult,lpId,precedence);
 			tier tierInstance = new tier();
+			tierSetup tierSetupObj=new tierSetup();
+			tierSetupObj.tierSetupFunc(name,pt,mult,lpId,precedence);
 			tierInstance.display(lpId);
 		case 2:
 			tier tierInstance1 = new tier();
