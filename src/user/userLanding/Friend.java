@@ -1,18 +1,59 @@
 package user.userLanding;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 
+import connection.ConnectionObj;
 import user.user;
 
 public class Friend {
 	
-//	public Friend() {
-//		
-//	}
+	static Connection conn = null;
 	
-	//	public void addToWallet(user u, int programId, int activityId, String giftCardCode, int amount) {}
+	public Friend() {
+		conn = ConnectionObj.getConnection();
+	}
+
+	public void addToReferFriend(String programId, String referId) {
 		
-	public void display(user u, int programId, int activityId) {
+		String query = "INSERT INTO REFERFRIEND VALUES(null,'" + programId + "',null, '" + referId + "')";
+		Statement stmt = null;
+		ResultSet rs=null;
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		try {
+			rs=stmt.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	public void addToWallet(String walletId, String programId, String referId) {
+		String query = "INSERT INTO WALLET_TRANSACTIONS VALUES('" + walletId + "','" + programId + "', '" + referId + "', '" + null + "', '"+ null + "', '" + null + "','REFERFRIEND')";
+		Statement stmt = null;
+		ResultSet rs=null;
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		try {
+			rs=stmt.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+		
+	public void display(user u, String programId) {
 			
 			
 			Scanner sc = new Scanner(System.in);
@@ -27,9 +68,12 @@ public class Friend {
 			{
 				case 1:
 					// add transaction to wallet table
-					// addToWallet(u, programId, activityId);
+					String walletId = u.getUserId();
+					String referId = "RF1"; // should be unique for every review
+					addToReferFriend(programId, referId);
+					addToWallet(walletId, programId, referId);
 					System.out.println("Thank you for Referring friend");
-					display(u, programId, activityId);
+					display(u, programId);
 					
 					break;
 				case 2:
