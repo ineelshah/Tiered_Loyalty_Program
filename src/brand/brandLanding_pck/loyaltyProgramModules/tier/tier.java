@@ -30,11 +30,11 @@ public class tier {
 				tierSetupinstance.display(b);
 			case 2:
 				activityTypes activityTypeinstance = new activityTypes();
-				activityTypeinstance.display(lp_id);
+				//activityTypeinstance.display(lp_id);
 				break;
 			case 3:
 				rewardTypes rewardTypesinstance = new rewardTypes();
-				rewardTypesinstance.display(lp_id);
+				//rewardTypesinstance.display(lp_id);
 				break;
 			case 4: 
 				return;

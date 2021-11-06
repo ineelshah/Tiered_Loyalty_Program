@@ -56,8 +56,8 @@ public class loyaltyProgram {
 		
 		case 2:
 			tier tierinstance = new tier();
-			String a = "tier";
-			glp.setProgram_type(a);
+			String ab = "tier";
+			glp.setProgram_type(ab);
 			String lp_id1 = br.getLp_id();
 			String br_id1 = br.getUnique_id();
 			tierinstance.display(br);
