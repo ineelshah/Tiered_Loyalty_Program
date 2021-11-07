@@ -49,7 +49,7 @@ public class LoyaltyProgram {
 		String activityId = "0";
 		String points = "0";
 		
-		String query = "INSERT INTO WALLET_TRANSACTIONS VALUES('" + walletId + "', '" + programId + "', '" + activityId + "', '"+ null + "', '" + points + "', '" + null + "')";
+		String query = "INSERT INTO WALLET_TRANSACTIONS VALUES('" + walletId + "', '" + programId + "', '" + activityId + "', '"+ null + "', '" + points + "', '" + null + "','JOIN')";
 		Statement stmt = null;
 		try {
 			stmt = conn.createStatement();

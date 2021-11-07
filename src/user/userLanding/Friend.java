@@ -52,6 +52,42 @@ public class Friend {
 			e.printStackTrace();
 		}  
 	}
+	
+	public String generateReferId()
+	{
+		//String lpId="LP"+String.valueOf(lpIdCounter);
+		conn = ConnectionObj.getConnection();
+		ResultSet rs=null;
+		Statement stmt=null;
+		int max=0;
+		String query="select REFERID from REFERFRIEND";
+		String temp="";
+		String rId="";
+		String finalString="";
+		String maxValueString="";
+		try
+		{
+			stmt=conn.prepareStatement(query);
+			rs=stmt.executeQuery(query);
+			
+			while(rs.next())
+			{
+				temp=rs.getString("REFERID");
+				String tempSubs=temp.substring(2);
+				max=Math.max(max,Integer.parseInt(tempSubs));
+					
+			}	
+			max++;
+			maxValueString=String.valueOf(max);
+			finalString="RF"+maxValueString;
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		return finalString;
+	}
 		
 	public void display(user u, String programId) {
 			
@@ -69,7 +105,7 @@ public class Friend {
 				case 1:
 					// add transaction to wallet table
 					String walletId = u.getUserId();
-					String referId = "RF1"; // should be unique for every review
+					String referId = generateReferId(); // should be unique for every review
 					addToReferFriend(programId, referId);
 					addToWallet(walletId, programId, referId);
 					System.out.println("Thank you for Referring friend");

@@ -52,7 +52,42 @@ public class Purchase {
 			e.printStackTrace();
 		}  
 	}
-		
+	
+	public String generatePurchaseId()
+	{
+		//String lpId="LP"+String.valueOf(lpIdCounter);
+		conn = ConnectionObj.getConnection();
+		ResultSet rs=null;
+		Statement stmt=null;
+		int max=0;
+		String query="select PURCHASEID from PURCHASE";
+		String temp="";
+		String pId="";
+		String finalString="";
+		String maxValueString="";
+		try
+		{
+			stmt=conn.prepareStatement(query);
+			rs=stmt.executeQuery(query);
+			
+			while(rs.next())
+			{
+				temp=rs.getString("PURCHASEID");		
+				String tempSubs=temp.substring(1);
+				max=Math.max(max,Integer.parseInt(tempSubs));
+			}	
+			max++;
+			maxValueString=String.valueOf(max);
+			finalString="P"+maxValueString;
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		return finalString;
+	}
+	
 	public void display(user u, String programId) {
 			
 			Scanner sc = new Scanner(System.in);
@@ -70,9 +105,9 @@ public class Purchase {
 			{
 				case 1:
 					String walletId = u.getUserId();
-					String purchaseId = "P1"; // should be unique for every purchase
-					addToWallet(walletId, programId, purchaseId);
+					String purchaseId = generatePurchaseId(); // should be unique for every purchase
 					addToPurchase(programId, purchaseId, giftCardCode, amount);
+					addToWallet(walletId, programId, purchaseId);
 					System.out.println("Thanks for the purchase");
 					Activity activity = new Activity();
 					activity.display(u);

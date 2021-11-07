@@ -60,6 +60,7 @@ public class Reward {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			int x = 0;
 		} 
 		try {
 			while(rs.next()) {
@@ -99,14 +100,7 @@ public class Reward {
 		
 	}
 	
-	
-//	public class Reward() {
-//		
-//	}
-	
-//	public void getReward(user u) {
-//		
-//	}
+
 	public boolean validateQuantity(String programId, String rewardId, int quantity){
 		ResultSet rs=null;
 		String query = "SELECT QUANTITY FROM LP_REWARDS WHERE PROGRAMID='"+programId+"' AND REWARDID='"+rewardId+"'";
@@ -168,7 +162,7 @@ public class Reward {
 		String query1 = "SELECT VERSION FROM RR_RULE_VERSION WHERE RULEID='"+ruleId+"'";
 		String version="";
 		Statement stmt = null;
-		String points="";
+		int points=0;
 		try {
 			stmt = conn.createStatement();
 		} catch (SQLException e) {
@@ -200,20 +194,57 @@ public class Reward {
 		} 
 		try {
 			while(rs.next()) {
-				points = rs.getString("POINTS");
+				points = Integer.valueOf(rs.getString("POINTS"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return Integer.valueOf(points);
+		return points;
 	}
-//	public void checkRRRule(user u, int rewardId) {
-//		
-//	}
-//	public void addRewardToDb(user u) {
-//		
-//	}
+	
+	public void deductPoints(int points, String walletId, String programId) {
+		ResultSet rs=null;
+		Statement stmt = null;
+		String query1 = "SELECT POINTS FROM WALLET WHERE WALLETID='"+walletId+"' AND PROGRAMID='"+programId+"'";
+		
+		int currentPoints=0;
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		try {
+			rs=stmt.executeQuery(query1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		try {
+			while(rs.next()) {
+				currentPoints =rs.getInt("POINTS");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		currentPoints-=points;
+		String query2 = "UPDATE WALLET SET POINTS='"+currentPoints+"' WHERE PROGRAMID='"+programId+"'AND WALLETID='"+walletId+"'";
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		try {
+			rs=stmt.executeQuery(query2);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
 	
 	
 	
@@ -230,7 +261,7 @@ public class Reward {
 		System.out.println("Please select an option from the menu:");
 		System.out.println("1.Rewards Selection");
 		System.out.println("2. Go back");	
-		
+		userLanding uLanding = new userLanding();
 		int choice = sc.nextInt();
 		
 		switch(choice)
@@ -252,14 +283,13 @@ public class Reward {
 				int points = getPoints(ruleId);
 				
 				//deduct points from wallet
-				//addRewardToDb()
+				deductPoints(points, walletId, programId);
 				
-				Activity activity = new Activity();
-				activity.display(u);
+				uLanding.display(u);
 				
 				break;
 			case 2:
-				userLanding uLanding = new userLanding();
+				
 				uLanding.display(u);
 				break;
 		}

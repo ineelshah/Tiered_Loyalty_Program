@@ -20,7 +20,7 @@ public class Activity {
 	
 	public void getLoyaltyProgram(String userId) {
 		
-		String query = "SELECT LOYALTY_PROGRAM_ID FROM WALLET_TRANSACTIONS WHERE WALLETID="+"'"+userId+"'";
+		String query = "SELECT DISTINCT LOYALTY_PROGRAM_ID FROM WALLET_TRANSACTIONS WHERE WALLETID="+"'"+userId+"'";
 		Statement stmt = null;
 		try {
 			stmt = conn.createStatement();
@@ -74,7 +74,7 @@ public class Activity {
 	}
 	public void getActivity(String programId) {
 		
-		String query = "SELECT ACTIVITYID FROM LP_ACTIVITY WHERE PROGRAMID="+"'"+programId+"'";
+		String query = "SELECT DISTINCT ACTIVITYID FROM LP_ACTIVITY WHERE PROGRAMID="+"'"+programId+"'";
 		Statement stmt = null;
 		try {
 			stmt = conn.createStatement();
@@ -102,6 +102,8 @@ public class Activity {
 		
 	}
 	
+	
+	
 	public void display(user u) {
 		
 		Scanner sc = new Scanner(System.in);
@@ -125,25 +127,25 @@ public class Activity {
 				//purchase
 				System.out.println("Purchase");
 				Purchase purchase = new Purchase();
-				//purchase.display(u, programId, activityId);
+				purchase.display(u, programId);
 				
 				break;
 			case 2:
 				//leave review
 				System.out.println("Review");
 				Review review = new Review();
-				//review.display(u, programId, activityId);
+				review.display(u, programId);
 				
 				break;
 			case 3:
 				//refer friend
 				System.out.println("Friend");
 				Friend friend = new Friend();
-<<<<<<< HEAD
+//<<<<<<< HEAD
 				//friend.display(u, programId, activityId);
-=======
+//=======
 				friend.display(u, String.valueOf(programId));
->>>>>>> a30bbddc5783b75fcedd5367226f68ecf222db4b
+//>>>>>>> a30bbddc5783b75fcedd5367226f68ecf222db4b
 				
 				break;
 			case 4:

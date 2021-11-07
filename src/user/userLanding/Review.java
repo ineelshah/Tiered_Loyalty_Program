@@ -52,7 +52,43 @@ static Connection conn = null;
 			e.printStackTrace();
 		}  
 	}
-		
+	
+	public String generateReviewId()
+	{
+		//String lpId="LP"+String.valueOf(lpIdCounter);
+		conn = ConnectionObj.getConnection();
+		ResultSet rs=null;
+		Statement stmt=null;
+		int max=0;
+		String query="select REVIEWID from LEAVEREVIEW";
+		String temp="";
+		String pId="";
+		String finalString="";
+		String maxValueString="";
+		try
+		{
+			stmt=conn.prepareStatement(query);
+			rs=stmt.executeQuery(query);
+			
+			while(rs.next())
+			{
+				temp=rs.getString("REVIEWID");
+				String tempSubs=temp.substring(1);
+				max=Math.max(max,Integer.parseInt(tempSubs));
+				
+
+			}	
+			max++;
+			maxValueString=String.valueOf(max);
+			finalString="R"+maxValueString;
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		return finalString;
+	}
 	public void display(user u, String programId) {
 			
 			
@@ -72,7 +108,7 @@ static Connection conn = null;
 					// addToWallet(u, programId, activityId, reviewString);
 					
 					String walletId = u.getUserId();
-					String reviewId = "R1"; // should be unique for every review
+					String reviewId = generateReviewId(); // should be unique for every review
 					addToWallet(walletId, programId, reviewId);
 					addToReview(programId, reviewId, reviewString);
 					System.out.println("Thanks for the Review");
