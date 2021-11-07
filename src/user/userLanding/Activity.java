@@ -139,11 +139,8 @@ public class Activity {
 				//refer friend
 				System.out.println("Friend");
 				Friend friend = new Friend();
-<<<<<<< HEAD
 				//friend.display(u, programId, activityId);
-=======
 				friend.display(u, String.valueOf(programId));
->>>>>>> a30bbddc5783b75fcedd5367226f68ecf222db4b
 				
 				break;
 			case 4:
