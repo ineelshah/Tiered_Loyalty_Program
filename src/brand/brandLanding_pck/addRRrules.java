@@ -62,9 +62,31 @@ public class addRRrules {
 		
 	}
 
+	public String getLPId(String bId) {
+		String getLPId = "SELECT LP_ID FROM BRAND WHERE BRANDID = '" + bId + "'";
+		String LPId = "";
+		ResultSet rs=null;
+		Statement stmt = null;
+		
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+		try {
+			rs=stmt.executeQuery(getLPId);
+			while(rs.next()) {
+				LPId = rs.getString("LP_ID");
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return LPId;
+	}
+	
 	public void display(brand b) {
 		Scanner sc = new Scanner(System.in);
-		String programId = "LP2";
+		String programId = getLPId(b.getUnique_id());
 		System.out.println("Please enter brand reward rule code:");
 		String rule_id = sc.next();
 		System.out.println("Please enter reward category:");
@@ -87,8 +109,9 @@ public class addRRrules {
 			display(b);
 			break;
 		case 2:
-			brandLanding brandLandingInstance = new brandLanding();
-			brandLandingInstance.display(b);
+//			brandLanding brandLandingInstance = new brandLanding();
+//			brandLandingInstance.display(b);
+			break;
 		
 		// TODO Auto-generated method stub
 	}

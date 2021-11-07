@@ -38,8 +38,8 @@ public class updateRRrules {
 		try {
 			while(rs.next()) {
 				newVersion = rs.getInt("VERSION");
-				newVersion+=1;
 			}
+			newVersion+=1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -101,8 +101,9 @@ public class updateRRrules {
 			display(b);
 			break;
 		case 2:
-			brandLanding brandLandingInstance = new brandLanding();
-			brandLandingInstance.display(b);
+//			brandLanding brandLandingInstance = new brandLanding();
+//			brandLandingInstance.display(b);
+			break;
 		
 		// TODO Auto-generated method stub
 		

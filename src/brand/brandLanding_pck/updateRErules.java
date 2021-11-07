@@ -73,25 +73,54 @@ public class updateRErules {
 		
 		
 	}
+	
+	
+	public void printExistingRulesForThisLP(String lpid) {
+		String query = "SELECT RERULEID, ACTIVITYID FROM LP_ACTIVITY WHERE PROGRAMID = '" + lpid + "'";
+		
+		ResultSet rs=null;
+		Statement stmt = null;
+
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+		try {
+			rs=stmt.executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		try {
+			while(rs.next()) {
+				System.out.println("|  " + rs.getString("RERULEID") + " 		| " + rs.getString("ACTIVITYID") + "	 | ");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void display(brand b) {
 		Scanner sc = new Scanner(System.in);
 		//String lp_id = b.getLp_id();
 		
-		System.out.println("Please enter brand reward rule code:");
+		System.out.println("--------------------------------------------");
+		System.out.println("RE Page");		
+		System.out.println("Please enter data  AS PROMPTED from existing rules you have defined:");
+		System.out.println("|RE RULE ID	| :	| ACTIVITY ID|");
+		printExistingRulesForThisLP(b.getLp_id());
+		System.out.println("Input the REWARD RULE CODE: ");
 		String rule_id = sc.next();
-		System.out.println("Please enter reward category:");
+		System.out.println("Please enter ACTIVITY CODE:");
 		String act_id = sc.next();
 		System.out.println("Enter the number of points:");
 		String np = sc.next();
-		
-		
-		System.out.println("--------------------------------------------");
-		System.out.println("RE Page");
 		System.out.println("Please select an option from the menu:");
 		System.out.println("1. Update RE Rule");
 		System.out.println("2. Go Back");
-		System.out.println("--------------------------------------------");
 		int choice= sc.nextInt();
+		System.out.println("--------------------------------------------");
+		
 		switch(choice)
 		{
 		case 1:
@@ -100,9 +129,7 @@ public class updateRErules {
 			display(b);
 			break;
 		case 2:
-			brandLanding brandLandingInstance = new brandLanding();
-			brandLandingInstance.display(b);
-		
+			break;
 		// TODO Auto-generated method stub
 		
 		
