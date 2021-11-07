@@ -5,8 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.Scanner;
 
+import brand.brand;
+import brand.brandLanding;
 import connection.ConnectionObj;
 
 public class rewardTypes{
@@ -44,45 +47,59 @@ public class rewardTypes{
 		System.out.println("Please select an option from the menu:");
 		
 		//fetch list of rewards from the Reward table
-		String query="SELECT * FROM REWARD";
+		String query="SELECT REWARDID, REWARDNAME FROM REWARD";
 		Statement stmt = null;
 		ResultSet rs=null;
 		int optionNumber=1;
+		HashMap<Integer, String> hmap = new HashMap<>();
+		
 		try {
 			stmt=conn.createStatement();
 			rs=stmt.executeQuery(query);
 			while(rs.next())
 			{
-				System.out.println(optionNumber+" "+rs.getString("REWARDNAME"));
+				hmap.put(optionNumber, rs.getString("REWARDID"));
+				System.out.println(optionNumber+". "+rs.getString("REWARDNAME"));
 				optionNumber++;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("There was an error in fetching rewards. Please try again or contact the admin.");
 		}
 		
-		System.out.println(optionNumber+" Go Back");
+		System.out.println(optionNumber+". Go Back");
 		System.out.println("--------------------------------------------");
 		int choice= sc.nextInt();
 		rewardTypes reward=new rewardTypes();
-		switch(choice)
-		{
-		case 1:
-			//handles Gift Card
-			// add the reward_id to the database table REGULAR_LP_REWARDS add_activity(lp_id,choice)
-			reward.addToLpRewards(lp_id,"R01",quantity);
+		if(choice != optionNumber) {
+			reward.addToLpRewards(lp_id,hmap.get(choice), quantity);
 			reward.display(lp_id);
-			break;
-		case 2:
-			//handles Free Product
-		    // add the reward_id to the database table REGULAR_LP_REWARDS  add_activity(lp_id,choice)
-			reward.addToLpRewards(lp_id,"R02",quantity);
-			reward.display(lp_id);
-			break;
-		case 3:
+		} else {
 			regular regularinstance = new regular();
-			regularinstance.display(lp_id);
-			break;
+			regularinstance.display(lp_id);	
 		}
+//		rewardTypes reward=new rewardTypes();
+//		switch(choice)
+//		{
+//		case 1:
+//			//handles Gift Card
+//			// add the reward_id to the database table REGULAR_LP_REWARDS add_activity(lp_id,choice)
+//			reward.addToLpRewards(lp_id,"R01",quantity);
+//			reward.display(lp_id);
+//			break;
+//		case 2:
+//			//handles Free Product
+//		    // add the reward_id to the database table REGULAR_LP_REWARDS  add_activity(lp_id,choice)
+//			reward.addToLpRewards(lp_id,"R02",quantity);
+//			reward.display(lp_id);
+//			break;
+//		case 3:
+////			regular regularinstance = new regular();
+////			regularinstance.display(lp_id);
+//			brand b = new brand();
+//			b.setLp_id(lp_id);
+//			brandLanding brandLandingInstance = new brandLanding();
+//			brandLandingInstance.display(b);
+//			break;
+//		}
 	}
 }

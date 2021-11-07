@@ -68,6 +68,7 @@ public class loyaltyProgram {
 		String query="select PROGRAMID from LOYALTYPROGRAM order by PROGRAMID";
 		String temp="";
 		String finalLpId="";
+		int maxId = 0;
 		try
 		{
 			stmt=conn.prepareStatement(query);
@@ -75,25 +76,14 @@ public class loyaltyProgram {
 			while(rs.next())
 			{
 				temp=rs.getString("PROGRAMID");
+				temp = temp.substring(2);
+				maxId = Math.max(maxId,  Integer.valueOf(temp));
 			}
-			if(!temp.equals("null"))
-			{
-				String tempId="";
-				for(int i=2;i<temp.length();i++)
-				{
-					tempId+=temp.charAt(i);
-				}
-				int Idval=Integer.parseInt(tempId);
-				//incrementing the id value
-				Idval++;
-				//appending LP prefix to it
-				finalLpId="LP"+String.valueOf(Idval);
-			}
-			else
-			{
-				finalLpId="LP1";
-			}
-			
+			int Idval=maxId;
+			//incrementing the id value
+			Idval++;
+			//appending LP prefix to it
+			finalLpId="LP"+String.valueOf(Idval);
 		}
 		catch(Exception e)
 		{
