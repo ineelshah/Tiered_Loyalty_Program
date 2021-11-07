@@ -76,16 +76,24 @@ public class loyaltyProgram {
 			{
 				temp=rs.getString("PROGRAMID");
 			}
-			String tempId="";
-			for(int i=2;i<temp.length();i++)
+			if(!temp.equals("null"))
 			{
-				tempId+=temp.charAt(i);
+				String tempId="";
+				for(int i=2;i<temp.length();i++)
+				{
+					tempId+=temp.charAt(i);
+				}
+				int Idval=Integer.parseInt(tempId);
+				//incrementing the id value
+				Idval++;
+				//appending LP prefix to it
+				finalLpId="LP"+String.valueOf(Idval);
 			}
-			int Idval=Integer.parseInt(tempId);
-			//incrementing the id value
-			Idval++;
-			//appending LP prefix to it
-			finalLpId="LP"+String.valueOf(Idval);
+			else
+			{
+				finalLpId="LP1";
+			}
+			
 		}
 		catch(Exception e)
 		{
