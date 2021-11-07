@@ -58,6 +58,37 @@ public class loginPage
 //		sc.close();
 	}
 	
+	
+	
+	public static String getLpId(String brandId) {
+		String doesUserExists = "SELECT LP_ID FROM BRAND WHERE BRANDID = '" + brandId + "'";
+		Statement stmt = null;
+		ResultSet rset=null;
+		String lpId = null;
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}  
+		try {
+			rset=stmt.executeQuery(doesUserExists);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+		
+		try {
+			while(rset.next())
+				lpId = rset.getString("LP_ID");
+			
+			if(lpId != null && !lpId.equals("")) {
+				return lpId;
+			}
+		} catch (Exception e) {
+			System.out.println("Some error occured. Please try again!");
+		}
+		return null;
+	}
+	
 	public static void signIn(user User)
 	{
 		boolean userPresent = checkUserCredentials(User);
@@ -66,9 +97,12 @@ public class loginPage
 			brand BrandObj = new brand();
 			if(userType.equals("b")) {				
 				BrandObj.setUnique_id(User.getUserId());
+				BrandObj.setLp_id(getLpId(BrandObj.getUnique_id()));
 				callDisplayMenu(userType, User, BrandObj);				
 			}
 			callDisplayMenu(userType, User, BrandObj);			
+		} else {
+			System.out.println("This user does not exist. Please sign up or check your credentials.");
 		}
 	}
 	
@@ -78,7 +112,7 @@ public class loginPage
 			adminLandingPage admin = new adminLandingPage();
 			admin.display();
 		} else if(userType.equals("b")) {
-			brandLanding Brand = new brandLanding();
+			brandLanding Brand = new brandLanding();			
 			Brand.display(BrandObj);
 		} else if (userType.equals("c")) {
 			userLanding userland = new userLanding();
@@ -105,7 +139,7 @@ public class loginPage
 		while(rs1.next())
 			dbPassword = rs1.getString("PASSWORD");
 		String inputPassword = User.getPassword();
-		if( dbPassword.equals(inputPassword))
+		if(dbPassword != null &&  dbPassword.equals(inputPassword))
 			return true;
 		return false;
 	}
