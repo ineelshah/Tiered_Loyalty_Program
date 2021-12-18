@@ -75,6 +75,31 @@ public class updateRRrules {
 		
 	}
 	
+	public void printExistingRulesForThisLP(String lpid) {
+		String query = "SELECT RRRULEID, REWARDID FROM LP_REWARDS WHERE PROGRAMID = '" + lpid + "'";
+		
+		ResultSet rs=null;
+		Statement stmt = null;
+
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+		try {
+			rs=stmt.executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		try {
+			while(rs.next()) {
+				System.out.println("|  " + rs.getString("RRRULEID") + " 		| " + rs.getString("REWARDID") + "	 | ");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void display(brand b) {
 		Scanner sc = new Scanner(System.in);
 		String programId = "LP2";
@@ -101,8 +126,8 @@ public class updateRRrules {
 			display(b);
 			break;
 		case 2:
-//			brandLanding brandLandingInstance = new brandLanding();
-//			brandLandingInstance.display(b);
+			brandLanding brandLandingInstance = new brandLanding();
+			brandLandingInstance.display(b);
 			break;
 		
 		// TODO Auto-generated method stub

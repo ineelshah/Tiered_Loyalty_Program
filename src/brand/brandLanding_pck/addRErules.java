@@ -84,15 +84,53 @@ public class addRErules {
 			}
 			return LPId;
 		}
+		
+		
+		public HashMap<Integer, String> printExistingRulesForThisLP(String lpid) {
+			String query = "SELECT R.ACTIVITY_CODE, R.ACTIVITY_NAME FROM LP_ACTIVITY LPA JOIN ACTIVITY R ON LPA.ACTIVITYID = R.ACTIVITY_CODE WHERE PROGRAMID = '" + lpid + "'";
+			
+			ResultSet rs1=null;
+			Statement stmt1 = null;
+			HashMap<Integer, String> hmap = new HashMap<>();
+			int count = 1;
+			try {
+				stmt1 = conn.createStatement();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+			try {
+				rs1=stmt1.executeQuery(query);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+			try {
+				System.out.println("Available Categories: ");
+				while(rs1.next()) {
+					hmap.put(count, rs1.getString("ACTIVITY_CODE"));
+					System.out.println(count + ". " + rs1.getString("ACTIVITY_CODE") + "	: " + rs1.getString("ACTIVITY_NAME"));
+					count++;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return hmap;
+		}
 
 		public void display(brand b) {
 			Scanner sc = new Scanner(System.in);
 			//String programId = b.getLp_id();
-			String programId = getLPId(b.getUnique_id());
-			System.out.println("Please enter brand reward rule code:");
+			String lp_id = b.getLp_id();
+			if(lp_id == null || lp_id.equals("")) {
+				lp_id = getLPId(b.getUnique_id());
+			}
+			String programId = lp_id;
+			System.out.println("Please enter brand reward earning rule code:");
 			String rule_id = sc.next();
-			System.out.println("Please enter activity category:");
-			String act_id = sc.next();
+			HashMap<Integer, String> hmap = printExistingRulesForThisLP(programId);
+			System.out.println("Please enter activity category: (Input the number): ");
+			
+			int act_id_int = sc.nextInt();
+			String act_id = hmap.get(act_id_int);
 			System.out.println("Enter the number of points:");
 			String np = sc.next();
 			
@@ -111,8 +149,8 @@ public class addRErules {
 				display(b);
 				break;
 			case 2:
-//				brandLanding brandLandingInstance = new brandLanding();
-//				brandLandingInstance.display(b);
+				brandLanding brandLandingInstance = new brandLanding();
+				brandLandingInstance.display(b);
 				break;
 			
 			

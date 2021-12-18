@@ -129,6 +129,8 @@ public class updateRErules {
 			display(b);
 			break;
 		case 2:
+			brandLanding brandLandingInstance = new brandLanding();
+			brandLandingInstance.display(b);
 			break;
 		// TODO Auto-generated method stub
 		

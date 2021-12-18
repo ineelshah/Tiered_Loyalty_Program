@@ -193,10 +193,31 @@ public class validateLoyaltyProgram {
 		return LPId;
 	}
 	
+	public void setValid(String LPId) {
+		String setLPId = "UPDATE LOYALTYPROGRAM SET LPFLAG = 'VALID' WHERE PROGRAMID = '" + LPId + "'";
+		ResultSet rs=null;
+		Statement stmt = null;
+		
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+		try {
+			rs=stmt.executeQuery(setLPId);		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void display(brand b) {
 		// TODO Auto-generated method stub
 		String bId = b.getUnique_id();
-		String LPId = getLPId(bId);
+		String LPId = b.getLp_id();
+		if(LPId == null || LPId.equals("")) {
+			LPId = getLPId(bId);
+		}
+		String programId = LPId;
 		boolean flagA = checkLPHasType(LPId);
 		boolean flagB = checkLPHasActivityId(LPId);
 		boolean flagC = checkLPHasRERuleIdForEachActivity(LPId);
@@ -208,12 +229,13 @@ public class validateLoyaltyProgram {
 		System.out.println("----------------Validation Result----------------");
 		if(flagA && flagB && flagC && flagD && flagE) {
 			System.out.println("The Loyalty Program is valid.");
+			setValid(programId);
 		} else {
 			System.out.println("The Loyalty Program is invalid.");
 		}
 		
-//		brandLanding brandLandingInstance = new brandLanding();
-//		brandLandingInstance.display(b);
+		brandLanding brandLandingInstance = new brandLanding();
+		brandLandingInstance.display(b);
 		
 	}
 	
