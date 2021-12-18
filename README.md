@@ -58,6 +58,6 @@ For any contributions that you would like to do, please contact me at: nshah26@n
 
 ## Appendix:
 
-You can refer to the Contributing.md file and Code_Of_Conduct.md for more information about how to contribute in the right manner. Happy contributing.
+You can refer to the CONTRIBUTING.md file and CODE_OF_CONDUCT.md for more information about how to contribute in the right manner. Happy contributing.
 
 Made with ❤️ on GitHub.
