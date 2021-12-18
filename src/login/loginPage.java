@@ -99,8 +99,9 @@ public class loginPage
 				BrandObj.setUnique_id(User.getUserId());
 				BrandObj.setLp_id(getLpId(BrandObj.getUnique_id()));
 				callDisplayMenu(userType, User, BrandObj);				
+			} else {
+				callDisplayMenu(userType, User, BrandObj);	
 			}
-			callDisplayMenu(userType, User, BrandObj);			
 		} else {
 			System.out.println("This user does not exist. Please sign up or check your credentials.");
 		}
@@ -165,7 +166,7 @@ public class loginPage
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(userType);
+//		System.out.println(userType);
 		return userType.substring(0, 1);
 		
 	}
