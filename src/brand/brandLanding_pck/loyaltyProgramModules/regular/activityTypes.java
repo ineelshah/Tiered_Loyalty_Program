@@ -2,6 +2,7 @@ package brand.brandLanding_pck.loyaltyProgramModules.regular;
 
 import java.util.*;
 
+import brand.brandLanding_pck.loyaltyProgramModules.tier.tier;
 import connection.ConnectionObj;
 
 import java.sql.Connection;
@@ -34,20 +35,20 @@ public class activityTypes{
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			System.out.println("The activity has already been chosen. Kindly choose other.");
 		}
 	}
 	
 	
 	
-	public void display(String lpId) {
+	public void display(String lpId, int type) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("--------------------------------------------");
 		System.out.println("Activity Page");
 		System.out.println("Please select an option from the menu:");
 		System.out.println("--------------------------------------------");
 		//get list of activities from the database
-		String query="SELECT ACTIVITY_CODE, ACTIVITY_NAME FROM ACTIVITY";
+		String query="SELECT ACTIVITY_CODE, ACTIVITY_NAME FROM ACTIVITY WHERE ACTIVITY_NAME <> 'JOIN'";
 		Statement stmt = null;
 		ResultSet rs=null;
 		int optionNumber = 1;
@@ -72,10 +73,15 @@ public class activityTypes{
 		activityTypes act=new activityTypes();
 		if(choice != optionNumber) {
 			act.addToLpActivity(lpId,hmap.get(choice));
-			act.display(lpId);
+			act.display(lpId, type);
 		} else {
-			regular regularinstance = new regular();
-			regularinstance.display(lpId);			
+			if(type == 1) {
+				regular regularinstance = new regular();
+				regularinstance.display(lpId);	
+			} else {
+				tier tierinstance = new tier();
+				tierinstance.display(lpId);			
+			}
 		}
 //		switch(choice)
 //		{

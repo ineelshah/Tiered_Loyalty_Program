@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import brand.brand;
 import brand.brandLanding;
+import brand.brandLanding_pck.loyaltyProgramModules.tier.tier;
 import connection.ConnectionObj;
 
 public class rewardTypes{
@@ -34,17 +35,14 @@ public class rewardTypes{
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			System.out.println("This reward has already been chosen. Kindly choose another one.");
 		}		
 	}
 	
-	public void display(String lp_id) {
+	public void display(String lp_id, int type) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("--------------------------------------------");
 		System.out.println("Reward Page");
-		System.out.println("Enter the quantity of the desired reward option:");
-		int quantity=Integer.parseInt(sc.nextLine());
-		System.out.println("Please select an option from the menu:");
 		
 		//fetch list of rewards from the Reward table
 		String query="SELECT REWARDID, REWARDNAME FROM REWARD";
@@ -66,16 +64,27 @@ public class rewardTypes{
 			System.out.println("There was an error in fetching rewards. Please try again or contact the admin.");
 		}
 		
+
+
 		System.out.println(optionNumber+". Go Back");
+		
 		System.out.println("--------------------------------------------");
+		System.out.println("Enter the quantity of the desired reward option: (QTY): ");
+		int quantity=Integer.parseInt(sc.nextLine());
+		System.out.println("Please select an option from the menu:");
 		int choice= sc.nextInt();
 		rewardTypes reward=new rewardTypes();
 		if(choice != optionNumber) {
 			reward.addToLpRewards(lp_id,hmap.get(choice), quantity);
-			reward.display(lp_id);
+			reward.display(lp_id, type);
 		} else {
-			regular regularinstance = new regular();
-			regularinstance.display(lp_id);	
+			if(type == 1) {
+				regular regularinstance = new regular();
+				regularinstance.display(lp_id);	
+			} else {
+				tier tierinstance = new tier();
+				tierinstance.display(lp_id);			
+			}	
 		}
 //		rewardTypes reward=new rewardTypes();
 //		switch(choice)
