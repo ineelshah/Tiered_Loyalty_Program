@@ -2,6 +2,7 @@ package brand.brandLanding_pck.loyaltyProgramModules.tier;
 import java.util.*;
 
 import brand.brand;
+import brand.brandLanding;
 import brand.brandLanding_pck.loyaltyProgramModules.regular.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,21 +24,28 @@ public class tier {
 			System.out.println("3. Add Reward Types");
 			System.out.println("4. Go Back");
 			int choice= sc.nextInt();
+			int type = 2;
 			switch(choice)
 			{
 			case 1: 
 				tierSetup tierSetupinstance = new tierSetup();
 				tierSetupinstance.display(lpId);
+				break;
 			case 2:
 				activityTypes activityTypeinstance = new activityTypes();
-				activityTypeinstance.display(lpId);
+				activityTypeinstance.display(lpId, type);
 				break;
 			case 3:
 				rewardTypes rewardTypesinstance = new rewardTypes();
-				rewardTypesinstance.display(lpId);
+				rewardTypesinstance.display(lpId, type);
 				break;
 			case 4: 
-				return;
+				brandLanding brLanding = new brandLanding();
+				brand b = new brand();
+				b.setLp_id(lpId);
+				b.setUnique_id(lpId);
+				brLanding.display(b);
+				break;
 			}
 		}
 }

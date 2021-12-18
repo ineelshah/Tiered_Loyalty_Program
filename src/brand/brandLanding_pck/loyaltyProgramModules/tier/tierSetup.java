@@ -81,9 +81,11 @@ public class tierSetup {
 			tierSetup tierSetupObj=new tierSetup();
 			tierSetupObj.tierSetupFunc(name,pt,mult,lpId,precedence);
 			tierInstance.display(lpId);
+			break;
 		case 2:
 			tier tierInstance1 = new tier();
 			tierInstance1.display(lpId);
+			break;
 		}
 	}
 }
