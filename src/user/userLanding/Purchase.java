@@ -18,8 +18,14 @@ public class Purchase {
 	}
 
 	public void addToPurchase(String programId, String purchaseId, String giftCardCode, String amount) {
-		
-		String query = "INSERT INTO PURCHASE VALUES('" + purchaseId + "', '" + giftCardCode + "', '" + programId + "', '" + amount + "', 'null')";
+		String query = "";
+		String dateStr = Activity.activityDate;
+
+		if(dateStr.equals("SYSDATE")) {
+			query = "INSERT INTO PURCHASE VALUES('" + purchaseId + "', '" + giftCardCode + "', '" + programId + "', '" + amount + "', SYSDATE)";
+		} else {
+			query = "INSERT INTO PURCHASE VALUES('" + purchaseId + "', '" + giftCardCode + "', '" + programId + "', '" + amount + "', TO_DATE('" + dateStr + "', 'MM-DD-YYYY'))";
+		}
 		Statement stmt = null;
 		ResultSet rs=null;
 		try {
@@ -35,8 +41,16 @@ public class Purchase {
 			e.printStackTrace();
 		}  
 	}
-	public void addToWallet(String walletId, String programId, String purchaseId) {
-		String query = "INSERT INTO WALLET_TRANSACTIONS VALUES('" + walletId + "','" + programId + "', '" + purchaseId + "', '" + null + "', '"+ null + "', '" + null + "','PURCHASE')";
+	
+	public void addToWallet(String walletId, String programId, String purchaseId, int pts) {
+		String query = "";
+		String dateStr = Activity.activityDate;
+
+		if(dateStr.equals("SYSDATE")) {
+			query = "INSERT INTO WALLET_TRANSACTIONS VALUES('" + walletId + "','" + programId + "', '" + purchaseId + "', " + "SYSDATE" + ", '"+ pts + "', '" + null + "','PURCHASE')";
+		} else {
+			query = "INSERT INTO WALLET_TRANSACTIONS VALUES('" + walletId + "','" + programId + "', '" + purchaseId + "', TO_DATE('" + dateStr + "', 'MM-DD-YYYY'), '"+ pts + "', '" + null + "','PURCHASE')";
+			}
 		Statement stmt = null;
 		ResultSet rs=null;
 		try {
@@ -51,6 +65,7 @@ public class Purchase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
+
 	}
 	
 	public String generatePurchaseId()
@@ -88,7 +103,7 @@ public class Purchase {
 		return finalString;
 	}
 	
-	public void display(user u, String programId) {
+	public void display(user u, String programId, int points) {
 			
 			Scanner sc = new Scanner(System.in);
 			System.out.println("--------------------------------------------");
@@ -106,8 +121,9 @@ public class Purchase {
 				case 1:
 					String walletId = u.getUserId();
 					String purchaseId = generatePurchaseId(); // should be unique for every purchase
+					int multiplier = Multiplier.getMultiplier(walletId, programId);
 					addToPurchase(programId, purchaseId, giftCardCode, amount);
-					addToWallet(walletId, programId, purchaseId);
+					addToWallet(walletId, programId, purchaseId, Integer.valueOf(points) * multiplier);
 					System.out.println("Thanks for the purchase");
 					Activity activity = new Activity();
 					activity.display(u);

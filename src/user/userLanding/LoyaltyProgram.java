@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import connection.ConnectionObj;
@@ -17,10 +18,13 @@ public class LoyaltyProgram {
 		conn = ConnectionObj.getConnection();
 	}
 	
-	public void getLoyaltyProgram() {
+	public HashMap<Integer, String> getLoyaltyProgram() {
 		
-		String query = "SELECT DISTINCT PROGRAMID FROM LOYALTYPROGRAM";
+		String query = "SELECT DISTINCT PROGRAMID, PROGRAMNAME FROM LOYALTYPROGRAM";
 		Statement stmt = null;
+		int count = 1;
+		HashMap<Integer, String> hmap = new HashMap<>();
+		
 		try {
 			stmt = conn.createStatement();
 		} catch (SQLException e) {
@@ -35,21 +39,24 @@ public class LoyaltyProgram {
 		} 
 		try {
 			while(rs.next()) {
-				System.out.println(rs.getString("PROGRAMID"));
+				hmap.put(count, rs.getString("PROGRAMID"));
+				System.out.println(count + ". " + rs.getString("PROGRAMNAME"));
+				count++;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+//		System.out.println(count + ". Exit");
+		return hmap;
 	}
 	
 	public void enrollInLoyaltyProgram(String programId, String walletId){
 		
-		String activityId = "0";
+		String activityId = "A0";
 		String points = "0";
 		
-		String query = "INSERT INTO WALLET_TRANSACTIONS VALUES('" + walletId + "', '" + programId + "', '" + activityId + "', '"+ null + "', '" + points + "', '" + null + "','JOIN')";
+		String query = "INSERT INTO WALLET_TRANSACTIONS VALUES('" + walletId + "', '" + programId + "', '" + activityId + "', "+ "SYSDATE" + ", '" + points + "', '" + null + "','JOIN')";
 		Statement stmt = null;
 		try {
 			stmt = conn.createStatement();
@@ -63,6 +70,22 @@ public class LoyaltyProgram {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
+		String tierId = "T1";
+		String insertIntoMaster = "INSERT INTO CUSTOMER_LP_MASTER (CUSTOMERID, LPID, TIERID, MULTIPLIER) VALUES ('" + walletId + "', '" + programId + "', '" + tierId + "', '1')";
+		stmt = null;
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		try {
+			rs=stmt.executeQuery(insertIntoMaster);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			System.out.println("This customer has been enrolled in this program already. Please choose some other option.");
+		} 
 	}
 	
 	public void display(user u) {
@@ -71,8 +94,9 @@ public class LoyaltyProgram {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("--------------------------------------------");
 		System.out.println("Please select id to enroll in loyalty program:");		
-		getLoyaltyProgram();
-		String programId = sc.next();
+		HashMap<Integer, String> hmap = getLoyaltyProgram();
+		int programIdInt = sc.nextInt();
+		String programId = hmap.get(programIdInt);
 		System.out.println("Please select an option from the menu:");
 		System.out.println("1. Enroll in Loyalty Program");
 		System.out.println("2. Go back");

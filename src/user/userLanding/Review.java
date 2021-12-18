@@ -19,7 +19,7 @@ static Connection conn = null;
 
 	public void addToReview(String programId, String reviewId, String reviewString) {
 		
-		String query = "INSERT INTO LEAVEREVIEW VALUES('" + reviewId + "', '" + programId + "', '" + reviewString + "', null)";
+		String query = "INSERT INTO LEAVEREVIEW VALUES('" + reviewId + "', '" + programId + "', '" + reviewString + "', SYSDATE)";
 		Statement stmt = null;
 		ResultSet rs=null;
 		try {
@@ -35,8 +35,16 @@ static Connection conn = null;
 			e.printStackTrace();
 		}  
 	}
-	public void addToWallet(String walletId, String programId, String reviewId) {
-		String query = "INSERT INTO WALLET_TRANSACTIONS VALUES('" + walletId + "','" + programId + "', '" + reviewId + "', '" + null + "', '"+ null + "', '" + null + "','LEAVEREVIEW')";
+	public void addToWallet(String walletId, String programId, String reviewId, int points) {
+		
+		String query = "";
+		String dateStr = Activity.activityDate;
+
+		if(dateStr.equals("SYSDATE")) {
+			query = "INSERT INTO WALLET_TRANSACTIONS VALUES('" + walletId + "','" + programId + "', '" + reviewId + "', " + "SYSDATE" + ", '"+ points + "', '" + null + "','LEAVEREVIEW')";
+		} else {
+			query = "INSERT INTO WALLET_TRANSACTIONS VALUES('" + walletId + "','" + programId + "', '" + reviewId + "', TO_DATE('" + dateStr + "', 'MM-DD-YYYY'), '"+ points + "', '" + null + "','LEAVEREVIEW')";
+		}
 		Statement stmt = null;
 		ResultSet rs=null;
 		try {
@@ -89,13 +97,19 @@ static Connection conn = null;
 		}
 		return finalString;
 	}
-	public void display(user u, String programId) {
+	
+	
+	
+	
+
+	
+	public void display(user u, String programId, int points) {
 			
 			
 			Scanner sc = new Scanner(System.in);
 			System.out.println("--------------------------------------------");
 			System.out.println("Please write a review");
-			String reviewString = sc.next();
+			String reviewString = sc.nextLine();
 			System.out.println("Please select an option from the menu:");
 			System.out.println("1. Leave a review");
 			System.out.println("2. Go back");
@@ -109,7 +123,8 @@ static Connection conn = null;
 					
 					String walletId = u.getUserId();
 					String reviewId = generateReviewId(); // should be unique for every review
-					addToWallet(walletId, programId, reviewId);
+					int multiplier = Multiplier.getMultiplier(walletId, programId);
+					addToWallet(walletId, programId, reviewId, points*multiplier);
 					addToReview(programId, reviewId, reviewString);
 					System.out.println("Thanks for the Review");
 					

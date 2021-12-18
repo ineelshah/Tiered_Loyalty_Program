@@ -20,6 +20,33 @@ public class Wallet {
 	
 	public void getWalletDetails(String walletId) {
 		
+		String query2 = "SELECT LP.PROGRAMNAME, W.POINTS FROM WALLET W LEFT JOIN LOYALTYPROGRAM LP ON W.PROGRAMID = LP.PROGRAMID WHERE WALLETID = '" + walletId + "'";
+		
+		
+		ResultSet rs2=null;
+		Statement stmt2 = null;
+		try {
+			stmt2 = conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		try {
+			rs2=stmt2.executeQuery(query2);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		try {
+			while(rs2.next()) {
+				System.out.println("Total Points in Wallet: Loyalty Program: " + rs2.getString("PROGRAMNAME") + ": " + rs2.getString("POINTS"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("____________________________________________________________________________________");
+		
 		String query = "SELECT * FROM WALLET_TRANSACTIONS WHERE WALLETID="+"'"+walletId+"'";
 		Statement stmt = null;
 		try {
@@ -38,6 +65,36 @@ public class Wallet {
 			System.out.println("WALLET ID | LOYALTY PROGRAM ID| ACTIVITY ID | ACTIVITY DATE | POINTS | RE RULE CODE | ACTIVITY NAME");
 			while(rs.next()) {
 				System.out.println(rs.getString("WALLETID")+" | "+rs.getString("LOYALTY_PROGRAM_ID")+" | "+rs.getString("ACTIVITY_ID")+" | "+rs.getString("ACTIVITY_DATE")+" | "+rs.getString("POINTS")+" | "+rs.getString("RE_RULE_CODE")+" | "+rs.getString("ACTIVITY_NAME"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("____________________________________________________________________________________");
+		
+		
+		
+		
+		String queryReward = "SELECT WALLETID, PROGRAMID, REWARDID, QUANTITY, POINTS, TRANSACTION_DATE FROM WALLET_REWARD_TRANSACTIONS WHERE WALLETID="+"'"+walletId+"'";
+		Statement stmtR = null;
+		ResultSet rsR = null;
+		try {
+			stmtR = conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		try {
+			rsR=stmtR.executeQuery(queryReward);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		try {
+			System.out.println("WALLET ID | LOYALTY PROGRAM ID| REWARD ID | QUANTITY | POINTS | TRANSACTION DATE");
+			while(rsR.next()) {
+				System.out.println(rsR.getString("WALLETID")+" | "+rsR.getString("PROGRAMID")+" | "+rsR.getString("REWARDID")+" | "+rsR.getInt("QUANTITY")+" | "+rsR.getInt("POINTS")+" | "+rsR.getDate("TRANSACTION_DATE"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

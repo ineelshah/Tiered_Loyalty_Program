@@ -17,9 +17,9 @@ public class Friend {
 		conn = ConnectionObj.getConnection();
 	}
 
-	public void addToReferFriend(String programId, String referId) {
+	public void addToReferFriend(String programId, String referId, String walletId) {
 		
-		String query = "INSERT INTO REFERFRIEND VALUES(null,'" + programId + "',null, '" + referId + "')";
+		String query = "INSERT INTO REFERFRIEND VALUES('"+ walletId + "','" + programId + "',null, '" + referId + "')";
 		Statement stmt = null;
 		ResultSet rs=null;
 		try {
@@ -35,8 +35,16 @@ public class Friend {
 			e.printStackTrace();
 		}  
 	}
-	public void addToWallet(String walletId, String programId, String referId) {
-		String query = "INSERT INTO WALLET_TRANSACTIONS VALUES('" + walletId + "','" + programId + "', '" + referId + "', '" + null + "', '"+ null + "', '" + null + "','REFERFRIEND')";
+	public void addToWallet(String walletId, String programId, String referId, int points) {
+//		String query = "INSERT INTO WALLET_TRANSACTIONS VALUES('" + walletId + "','" + programId + "', '" + referId + "', '" + null + "', '"+ null + "', '" + null + "','REFERFRIEND')";
+		String query = "";
+		String dateStr = Activity.activityDate;
+		if(dateStr.equals("SYSDATE")) {
+			query = "INSERT INTO WALLET_TRANSACTIONS VALUES('" + walletId + "','" + programId + "', '" + referId + "', " + "SYSDATE" + ", '"+ points + "', '" + null + "','REFERFRIEND')";
+		} else {
+			query = "INSERT INTO WALLET_TRANSACTIONS VALUES('" + walletId + "','" + programId + "', '" + referId + "', " + "TO_DATE('" + dateStr + "', 'MM-DD-YYYY')" + ", '"+ points + "', '" + null + "','REFERFRIEND')";
+		}
+		
 		Statement stmt = null;
 		ResultSet rs=null;
 		try {
@@ -89,7 +97,7 @@ public class Friend {
 		return finalString;
 	}
 		
-	public void display(user u, String programId) {
+	public void display(user u, String programId, int points) {
 			
 			
 			Scanner sc = new Scanner(System.in);
@@ -106,10 +114,11 @@ public class Friend {
 					// add transaction to wallet table
 					String walletId = u.getUserId();
 					String referId = generateReferId(); // should be unique for every review
-					addToReferFriend(programId, referId);
-					addToWallet(walletId, programId, referId);
+					addToReferFriend(programId, referId, walletId);
+					int multiplier = Multiplier.getMultiplier(walletId, programId);
+					addToWallet(walletId, programId, referId, points*multiplier);
 					System.out.println("Thank you for Referring friend");
-					display(u, programId);
+					display(u, programId, points);
 					
 					break;
 				case 2:
