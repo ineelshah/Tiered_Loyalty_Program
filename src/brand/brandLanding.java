@@ -59,7 +59,8 @@ public class brandLanding{
 			validateLoyaltyPrograminstance.display(b);
 			break;
 		case 7: 
-			return;
+			mainMenu.display();
+			break;
 		}
 	}
 	
