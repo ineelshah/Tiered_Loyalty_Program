@@ -30,20 +30,25 @@ public class addActivityType
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		 }
+		try {
+			rs1=smt.executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
 		  
 	}
 	public void display()
 	{
 		Scanner sc=new Scanner(System.in);
-		System.out.println("Activity name");
-		System.out.println("Activity code");
+		System.out.println("Activity name:");
 		String activityName=sc.nextLine();
+		System.out.println("Activity code:");
 		String activityCode=sc.nextLine();
 		activityType act=new activityType();
 		act.setActivityName(activityName);
 		act.setActivityCode(activityCode);
-		System.out.println("Add Activity Type");
-		System.out.println("Go Back");
+		System.out.println("1. Add Activity Type");
+		System.out.println("2. Go Back");
 		int choice=sc.nextInt();
 		switch(choice)
 		{

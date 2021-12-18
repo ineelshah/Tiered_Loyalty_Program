@@ -100,7 +100,7 @@ public class addBrand
 			joinDate = String.valueOf(formatter.format(date));
 		}
 		
-		String query = "INSERT INTO BRAND VALUES('" + brandId + "', '" + brandName + "', '" + address + "', '', '" + joinDate + "')";
+		String query = "INSERT INTO BRAND VALUES('" + brandId + "', '" + brandName + "', '" + address + "', '', '" + joinDate + "', '')";
 		Statement stmt = null;
 		try {
 			stmt = conn.createStatement();
