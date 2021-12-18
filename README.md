@@ -3,6 +3,24 @@ This is a project implemented as a part of our Database Management Systems cours
 
 We have implemented the project using **Oracle Database** and **Java**.
 
+
+
+# Instructions to execute the code:
+
+1. Login/ssh to remote.eos.ncsu.edu:
+2. Upload Marketplace.jar, Setup.sql, Populate.sql to your unity account. You can put it in a directory of your choice.
+3. Navigate to the directory you have copied everything in.
+4. Add Oracle to your environment  add oracle12
+5. Run command "sqlplus".
+6. Create all the tables, triggers, constraints, procedures using the command: "@Setup.sql" and press Enter.
+7. Similarly import all data to the database using: "@Populate.sql" and press Enter.
+8. Exit from the sqlplus using: "exit" and press Enter.
+9. Run the jar by the command: java -jar Marketplace.jar
+10. When you run the jar, you can input the credentials for the account you just ran the scripts on. 
+Or, you can just press enter when you are prompted for the input. This will take the default credentials which will point to the database on one of our team member's accounts.
+11. You will be prompted if you were logged in successfully, or enter the correct credentials to the database. Or program connects to: "jdbc:oracle:thin:@ora.csc.ncsu.edu:1521:orcl01". 
+12. Welcome to the marketplace.
+
 # ER Diagram:
 
 ![ER Diagram](https://user-images.githubusercontent.com/40118578/146626502-bd250e88-694d-4a40-a45a-e6344b32c4ae.jpg)
